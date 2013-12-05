@@ -4,7 +4,7 @@ define(function(){
     "</header>" +
     "<section class='content'>" +
       "<h1>Loading</h1>" +
-      "<img src='../styles/images/loading.gif'>" +
+      "<img src='js/styles/images/loading.gif'>" +
     "</section>" +
   "</section>" +
 
@@ -38,7 +38,7 @@ define(function(){
   "<section class='hidden modal closed'>" +
     "<h1>Search Controls</h1>" +
     "<button class='toggleModal'>X</button>" +
-    "<button class='centerMap'><img src='../styles/images/map-center.png'></button>" +
+    "<button class='centerMap'><img src='js/styles/images/map-center.png'></button>" +
     "<button class='zoomOut' href='#'>-</button>" +
     "<button class='zoomIn' href='#'>+</button>" +
   "</section>";
