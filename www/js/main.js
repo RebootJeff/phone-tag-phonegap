@@ -1,11 +1,4 @@
 require.config({
-  config: {
-    text: {
-      useXhr: function (url, protocol, hostname, port) {
-        return true;
-      }
-    }
-  },
   paths: {
     backbone: 'lib/backbone/backbone-min',
     handlebars: 'lib/handlebars/handlebars.min',

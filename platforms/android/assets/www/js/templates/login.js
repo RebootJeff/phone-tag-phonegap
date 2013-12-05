@@ -1,5 +1,5 @@
-var loginTemplate =
- "<section id='login' class='page center'>" +
+define(function(){
+  return "<section id='login' class='page center'>" +
     "<header class='header'>" +
       "<h1>This is PhoneTag</h1>" +
     "</header>" +
@@ -11,3 +11,4 @@ var loginTemplate =
       "</form>" +
     "</section>" +
   "</section>";
+});

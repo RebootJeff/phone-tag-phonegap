@@ -1,7 +1,6 @@
 define(['backbone', '../views/GameView', '../models/game', '../views/HomeView', '../views/LoginView', '../views/JoinView', '../models/map'], function(Backbone, GameView, Game, HomeView, LoginView, JoinView, Map){
   var Router = Backbone.Router.extend({
     initialize: function(options){
-      debugger;
       this.app = options.app;
     },
 

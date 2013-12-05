@@ -38,6 +38,7 @@
 /home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/models \
 /home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/templates \
 /home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/routers \
+/home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/styles \
 /home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/collections \
 /home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/lib/zepto \
 /home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/lib/requirejs-text \
@@ -1004,6 +1005,18 @@
 /home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/templates/login.js \
 /home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/templates/game.html \
 /home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/routers/MainRouter.js \
+/home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/styles/images \
+/home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/styles/images/heart-broken.png \
+/home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/styles/images/evil.png \
+/home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/styles/images/cancel-circle.png \
+/home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/styles/images/smiley.png \
+/home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/styles/images/loading.gif \
+/home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/styles/images/wink.png \
+/home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/styles/images/happy.png \
+/home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/styles/images/grin.png \
+/home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/styles/images/map-center.png \
+/home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/styles/images/tongue.png \
+/home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/styles/images/shocked.png \
 /home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/js/collections/otherPlayers.js \
 /home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/res/icon \
 /home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/res/screen \
@@ -1068,6 +1081,7 @@
 /home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/res/screen/windows-phone/screen-portrait.jpg \
 /home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/img/logo.png \
 /home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/styles/styles.css \
+/home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/styles/styles.styl \
 /home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/styles/images \
 /home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/styles/index.css \
 /home/jeff/Documents/Hack_Reactor/phone_tag/phone-tag-android/platforms/android/assets/www/styles/images/evil.png \
