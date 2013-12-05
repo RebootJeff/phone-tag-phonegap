@@ -125,7 +125,6 @@ define(['backbone'], function(Backbone){
     },
 
     handleError: function(err){
-      $('#tester').append(err.message);
       console.warn('ERROR(' + err.code + '): ' + err.message);
     },
 
