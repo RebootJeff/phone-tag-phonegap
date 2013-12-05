@@ -1,6 +1,9 @@
-var OtherPlayers = Backbone.Collection.extend({
-  model: OtherPlayer,
+define(['backbone', '../models/otherPlayer'], function(Backbone, OtherPlayer){
+  var otherPlayers = Backbone.Collection.extend({
+    model: OtherPlayer,
 
-  initialize: function(){
-  }
+    initialize: function(){
+    }
+  });
+  return otherPlayers;
 });

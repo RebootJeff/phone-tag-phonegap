@@ -1,1 +1,3 @@
-var mapTemplate = "<section id='map-canvas'></section>";
+define(function(){
+  return "<section id='map-canvas'></section>";
+});

@@ -1,5 +1,5 @@
-var homeTemplate =
-  "<section id='home' class='page center'>" +
+define(function(){
+  return "<section id='home' class='page center'>" +
     "<header class='header'>" +
       "<a class='logout' href='#'>Logout</a>" +
       "<h1>Home</h1>" +
@@ -21,3 +21,4 @@ var homeTemplate =
       "<p>Some data should be here</p>" +
     "</section>" +
   "</section>";
+});
