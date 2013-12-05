@@ -43,7 +43,7 @@ define(['backbone'], function(Backbone){
     gpsOptions: {
       enableHighAccuracy: true,
       // timeout: 10000,
-      maximumAge: 5000
+      maximumAge: 15000
     },
 
     markers: [],
@@ -60,7 +60,7 @@ define(['backbone'], function(Backbone){
         position: latLng,
         map: this.map,
         visible: false,
-        icon: '../styles/images/evil.png'
+        icon: 'js/styles/images/evil.png'
       });
       marker.id = data.name;
       this.markers.push(marker);
@@ -68,7 +68,7 @@ define(['backbone'], function(Backbone){
       if(marker.id === this.get('currentPlayer').get('name')){
         this.watchLocation(marker);
         marker.setVisible(true);
-        marker.setIcon('../styles/images/wink.png');
+        marker.setIcon('js/styles/images/wink.png');
       }else{
         setInterval(function(){that.markerRadarDisplay(marker);}, 5000);
       }
@@ -125,6 +125,7 @@ define(['backbone'], function(Backbone){
     },
 
     handleError: function(err){
+      $('#tester').append(err.message);
       console.warn('ERROR(' + err.code + '): ' + err.message);
     },
 
@@ -176,7 +177,7 @@ define(['backbone'], function(Backbone){
       for(var i = 0; i < this.markers.length; i++){
         marker = this.markers[i];
         if(marker.id === player.name){
-          marker.setIcon('../styles/images/heart-broken.png');
+          marker.setIcon('js/styles/images/heart-broken.png');
           return;
         }
       }
@@ -185,13 +186,13 @@ define(['backbone'], function(Backbone){
     setPlayerAlive: function(player){
       var marker;
       if(player.name === this.get('currentPlayer').get('name')){
-        return this.currentPlayerMarker.setIcon('../styles/images/wink.png');
+        return this.currentPlayerMarker.setIcon('js/styles/images/wink.png');
       }
 
       for(var i = 0; i < this.markers.length; i++){
         marker = this.markers[i];
         if(marker.id === player.name){
-          return marker.setIcon('../styles/images/evil.png');
+          return marker.setIcon('js/styles/images/evil.png');
         }
       }
     },
