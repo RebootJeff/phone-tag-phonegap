@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>phoneTag</title>
+    <link rel='stylesheet' href='styles/styles.css'>
+  </head>
+  <body>
+    <aside id='tester'></aside>
+    <section id='container'></section>
+    <!-- Dependencies -->
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&v=3&libraries=geometry"></script>
+    <script src='http://hadooken.herokuapp.com/socket.io/socket.io.js'></script>
+    <script src='phonegap.js'></script>
+    <script src='js/lib/lodash/dist/lodash.min.js'></script>
+    <script src='js/lib/zepto/zepto.min.js'></script>
+    <script src='js/lib/backbone/backbone-min.js'></script>
+    <script src='js/lib/handlebars/handlebars.min.js'></script>
+    <!-- Backbone Models and Collections -->
+    <script src='js/models/app.js'></script>
+    <script src='js/models/currentPlayer.js'></script>
+    <script src='js/models/game.js'></script>
+    <script src='js/models/map.js'></script>
+    <script src='js/models/otherPlayer.js'></script>
+    <script src='js/collections/otherPlayers.js'></script>
+    <!-- Templates -->
+    <script src='js/templates/game.js'></script>
+    <script src='js/templates/home.js'></script>
+    <script src='js/templates/join.js'></script>
+    <script src='js/templates/login.js'></script>
+    <script src='js/templates/map.js'></script>
+    <!-- Backbone Views -->
+    <script src='js/views/AppView.js'></script>
+    <script src='js/views/GameView.js'></script>
+    <script src='js/views/HomeView.js'></script>
+    <script src='js/views/JoinView.js'></script>
+    <script src='js/views/LoginView.js'></script>
+    <script src='js/views/MapView.js'></script>
+    <!-- Backbone Router -->
+    <script src='js/routers/MainRouter.js'></script>
+    <!-- App starter -->
+    <script src='js/main.js'></script>
+  </body>
+</html>
