@@ -1,4 +1,4 @@
-@import "topcoat-mobile-dark.css";
+@import "topcoat-mobile-light.css";
 body {
   margin: 0;
   padding: 0;
@@ -47,6 +47,7 @@ a {
   border: 0;
   padding: 0.5em;
   margin: 0.5em;
+  background-color: #189e9e;
 }
 h1 {
   font-weight: 400;
