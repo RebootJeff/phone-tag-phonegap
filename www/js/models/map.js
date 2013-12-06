@@ -232,17 +232,29 @@ define(['backbone'], function(Backbone){
       this.get('socket').emit('tagPlayers', response);
     },
 
-    tagAnimate: function(){
-      var radius = 0;
-      var that = this;
+    tagAnimate: function(name){
+      var center = this.currentPlayerMarker.position,
+          strokeColor = '#FF0000',
+          that = this,
+          radius = 0,
+          marker;
+      if(name && name !== this.get('currentPlayer').get('name')){
+        for(var i = 0; i < this.markers.length; i++){
+          marker = this.markers[i];
+          if(marker.id === name){
+            center = marker.position;
+            strokeColor = '#3777D8';
+          }
+        }
+      }
       var circleOptions = {
-        strokeColor: '#FF0000',
+        strokeColor: strokeColor,
         strokeOpacity: 0.8,
         strokeWeight: 2,
-        fillColor: '#FF0000',
+        fillColor: strokeColor,
         fillOpacity: 0.35,
         map: that.map,
-        center: this.currentPlayerMarker.position,
+        center: center,
         radius: radius
       };
       that.circle = new google.maps.Circle(circleOptions);
