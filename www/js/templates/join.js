@@ -5,5 +5,5 @@ define(function(){
       "<th>Players</th>" +
     "</tr>" +
   "</table>" +
-  "<button class='start'>Start!</button>";
+  "<button class='start topcoat-button--large'>Start!</button>";
 });

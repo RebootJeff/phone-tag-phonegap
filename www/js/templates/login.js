@@ -6,7 +6,7 @@ define(function(){
     </header> \
     <section class='content'> \
       <form> \
-        <input type='text' placeholder='Username?'></input> \
+        <input type='text' class='topcoat-text-input--large' placeholder='Username?'></input> \
         <submit>Sign up</submit> \
       </form> \
     </section> \
