@@ -14,13 +14,13 @@ define(['backbone', 'routers/MainRouter'], function(Backbone, Router){
     events: {
       // Login events
       'submit': 'login',
-      'click a.logout': 'logout',
+      'click button.logout': 'logout',
 
       // View render events
-      'click a.home':  'renderHomeView',
-      'click a.leaderboard': 'renderLeaderboardView',
-      'click a.join': 'renderJoinView',
-      'click a.game': 'renderGameView',
+      'click button.home':  'renderHomeView',
+      'click button.leaderboard': 'renderLeaderboardView',
+      'click button.join': 'renderJoinView',
+      'click button.game': 'renderGameView',
 
       // Game events
       // 'click button.start': 'sendStartGame',
@@ -30,7 +30,6 @@ define(['backbone', 'routers/MainRouter'], function(Backbone, Router){
       'click button.inventory': 'renderInventoryView',
       'click button.quit': 'quitGame',
       'renderGameViews': 'renderGameView',
-      'click #inventory li': 'powerUpInventory',
 
       // Map control events
       'click button.zoomOut': 'zoomOut',
