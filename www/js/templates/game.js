@@ -24,7 +24,7 @@ define(function(){
   <section id='inventory' class='page right'> \
     <header class='header'> \
       <h1>Inventory</h1> \
-      <a class='game' href='#'>Back</a> \
+      <a class='game'>Back</a> \
     </header> \
     <section class='content'> \
       <ul> \
@@ -37,7 +37,6 @@ define(function(){
   </section> \
   \
   <section class='modal closed'> \
-    <h1>Search Controls</h1> \
     <button class='toggleModal'><img src='img/cancel-circle.png'></button> \
     <button class='centerMap'><img src='img/map-center.png'></button> \
     <button class='zoomOut'><img src='img/minus.png'></button> \

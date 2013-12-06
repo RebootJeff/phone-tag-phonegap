@@ -4,6 +4,7 @@ require.config({
     handlebars: 'lib/handlebars/handlebars.min',
     zepto: 'lib/zepto/zepto.min',
     underscore: 'lib/lodash/dist/lodash.min',
+    Hammer: 'lib/hammerjs/dist/jquery.hammer.min'
   },
   shim: {
     'backbone': {
@@ -15,6 +16,10 @@ require.config({
     },
     'zepto': {
       exports: '$'
+    },
+    'Hammer': {
+      deps: ['zepto'],
+      exports: 'Hammer'
     }
   }
 });

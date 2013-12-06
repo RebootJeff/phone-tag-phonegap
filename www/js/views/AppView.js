@@ -1,4 +1,4 @@
-define(['backbone', 'routers/MainRouter'], function(Backbone, Router){
+define(['backbone', 'Hammer', 'routers/MainRouter'], function(Backbone, Hammer, Router){
   var AppView = Backbone.View.extend({
 
     el: $('body'),
@@ -8,35 +8,49 @@ define(['backbone', 'routers/MainRouter'], function(Backbone, Router){
       // this.router.on('route', function(){console.log(this.model.get('user'));}, this);
       this.model.on('loggedIn', this.renderHomeView, this);
       this.model.on('renderGameViews', this.renderGameView, this);
+      this.hammerSetup();
       Backbone.history.start({pushState: false});
     },
 
     events: {
-      // Login events
       'submit': 'login',
-      'click a.logout': 'logout',
+      'renderGameViews': 'renderGameView',
+    },
+
+    hammerSetup: function(){
+      var hammertime = this.$el.hammer();
+      // Login events
+      hammertime.on('tap', 'a.logout', this.logout.bind(this));
 
       // View render events
-      'click a.home':  'renderHomeView',
-      'click a.leaderboard': 'renderLeaderboardView',
-      'click a.join': 'renderJoinView',
-      'click a.game': 'renderGameView',
+      hammertime.on('tap', 'a.home', this.renderHomeView.bind(this));
+      hammertime.on('tap', 'a.leaderboard', this.renderLeaderboardView.bind(this));
+      hammertime.on('tap', 'a.join', this.renderJoinView.bind(this));
+      hammertime.on('tap', 'a.game', this.renderGameView.bind(this));
 
       // Game events
-      // 'click button.start': 'sendStartGame',
-      'click #inventory li': 'powerUpInventory',
-      'click button.tag': 'tag',
-      'click button.powerUp': 'powerUp',
-      'click button.inventory': 'renderInventoryView',
-      'click button.quit': 'quitGame',
-      'renderGameViews': 'renderGameView',
-      'click #inventory li': 'powerUpInventory',
+      // hammertime.on('tap', 'button.start', this.sendStartGame.bind(this));
+      hammertime.on('tap', '#inventory li', this.powerUpInventory.bind(this));
+      hammertime.on('tap', 'button.tag', this.tag.bind(this));
+      hammertime.on('tap', 'button.powerUp', this.powerUp.bind(this));
+      hammertime.on('tap', 'button.inventory', this.renderInventoryView.bind(this));
+      hammertime.on('tap', 'button.quit', this.quitGame.bind(this));
 
       // Map control events
-      'click button.zoomOut': 'zoomOut',
-      'click button.zoomIn': 'zoomIn',
-      'click button.toggleModal': 'toggleModal',
-      'click button.centerMap': 'centerMap'
+      hammertime.on('tap', 'button.zoomOut', this.zoomOut.bind(this));
+      hammertime.on('tap', 'button.zoomIn', this.zoomIn.bind(this));
+      hammertime.on('tap', 'button.toggleModal', this.toggleModal.bind(this));
+      hammertime.on('tap', 'button.centerMap', this.centerMap.bind(this));
+
+    // var container = $('#container');
+    // Hammer(this.$el).on('tap','input', function(event){
+    //   debugger;
+    //   console.log("input is being clicked");
+    // });
+    // Hammer(container).on('swipeup', function(event){
+    //   console.log('swipeup!');
+    // });
+
     },
 
     // Login/Logout functions
