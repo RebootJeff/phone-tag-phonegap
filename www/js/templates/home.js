@@ -2,21 +2,20 @@ define(function(){
   /*jshint multistr: true */
   return "<section id='home' class='page center'> \
     <header class='header'> \
-      <a class='logout' href='#'>Logout</a> \
       <h1>Home</h1> \
     </header> \
     <section class='content'> \
-      <h3>Welcome!</h3> \
-      <p><a class='join' href='#'>Join</a></p> \
-      <p><a class='leaderboard' href='#leaderboard'>Leaderboard</a></p> \
+      <button class='join topcoat-button'>Join</button> \
+      <button class='leaderboard topcoat-button'>Leaderboard</button> \
+      <button class='logout topcoat-button'>Logout</button> \
     </section> \
   </section> \
   \
   <section id='leaderboard' class='page right'> \
     <header class='header'> \
       <h1>Leaderboard</h1> \
-      <a class='home' href='#'>Back</a> \
-      <a class='logout' href='#'>Logout</a> \
+      <button class='home topcoat-button'>Back</button> \
+      <button class='logout topcoat-button'>Logout</button> \
     </header> \
     <section class='content'> \
       <p>Some data should be here</p> \
