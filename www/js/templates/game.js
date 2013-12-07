@@ -9,7 +9,7 @@ define(function(){
     </section> \
   </section> \
   \
-  <section id='game' class='page right'> \
+  <section id='game' class='page left'> \
     <section class='content'> \
     </section> \
     <aside class='menu closed'> \
