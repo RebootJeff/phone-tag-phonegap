@@ -20,7 +20,7 @@ define(function(){
       <button class='topcoat-button toggle-menu'></button> \
     </aside> \
     <aside class='bottom-controls'> \
-      <button class='topcoat-button tag'>TAG</button> \
+      <button class='topcoat-button tag hidden'>TAG</button> \
     </aside> \
   </section>";
 });
