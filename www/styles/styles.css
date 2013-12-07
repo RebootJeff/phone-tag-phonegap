@@ -36,7 +36,8 @@ a {
   font-size: 2em;
   border: 0;
   padding: 0.5em;
-  margin: 0.5em;
+  margin: 1em auto;
+  display: block;
 }
 .topcoat-button,
 .topcoat-button--large {
@@ -93,7 +94,7 @@ table {
   transition-duration: 0.25s;
 }
 .join {
-  font-size: 2em;
+  font-size: 1.5em;
 }
 .menu {
   height: 100%;
@@ -151,6 +152,9 @@ table {
 .tag {
   bottom: 2%;
   width: 30%;
-  background-color: #c9001b;
+  background-color: #1b676b;
   color: #fff;
+}
+.hidden {
+  display: none;
 }
