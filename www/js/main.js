@@ -4,6 +4,7 @@ require.config({
     handlebars: 'lib/handlebars/handlebars.min',
     zepto: 'lib/zepto/zepto.min',
     underscore: 'lib/lodash/dist/lodash.min',
+    text : 'lib/requirejs-text/text'
   },
   shim: {
     'backbone': {

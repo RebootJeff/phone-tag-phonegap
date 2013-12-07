@@ -5,19 +5,19 @@ define(function(){
     </header> \
     <section class='content'> \
       <h1>Loading</h1> \
-      <img src='img/loading.gif'> \
+      <img src='../styles/images/loading.gif'> \
     </section> \
   </section> \
   \
   <section id='game' class='page right'> \
     <header class='header'> \
-      <button class='quit'><img src='img/exit.png'></button> \
-      <button class='inventory'><img src='img/cabinet.png'></button> \
+      <button class='quit'><img src='../styles/images/exit.png'></button> \
+      <button class='inventory'><img src='../styles/images/cabinet.png'></button> \
     </header> \
     <section class='content'> \
-      <button class='toggleModal'><img src='img/map.png'></button> \
+      <button class='toggleModal'><img src='../styles/images/map.png'></button> \
       <button class='tag'>Tag</button> \
-      <button class='powerUp'><img src='img/lightning.png'</button> \
+      <button class='powerUp'><img src='../styles/images/lightning.png'</button> \
     </section> \
   </section> \
   \
@@ -38,9 +38,9 @@ define(function(){
   \
   <section class='modal closed'> \
     <h1>Search Controls</h1> \
-    <button class='toggleModal'><img src='img/cancel-circle.png'></button> \
-    <button class='centerMap'><img src='img/map-center.png'></button> \
-    <button class='zoomOut'><img src='img/minus.png'></button> \
-    <button class='zoomIn'><img src='img/plus.png'></button> \
+    <button class='toggleModal'><img src='../styles/images/cancel-circle.png'></button> \
+    <button class='centerMap'><img src='../styles/images/map-center.png'></button> \
+    <button class='zoomOut'><img src='../styles/images/minus.png'></button> \
+    <button class='zoomIn'><img src='../styles/images/plus.png'></button> \
   </section>";
 });

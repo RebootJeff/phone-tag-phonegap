@@ -5,6 +5,7 @@ define(function(){
       <h1>This is PhoneTag</h1> \
     </header> \
     <section class='content'> \
+      <!-- <a class='login' href='/auth/facebook'>Login with Facebook</a> --> \
       <form> \
         <input type='text' placeholder='Username?'></input> \
         <submit>Sign up</submit> \
