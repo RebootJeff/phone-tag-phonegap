@@ -33,9 +33,6 @@ define(['backbone'], function(Backbone){
           { visibility: "simplified" }
         ]
       },{
-        featureType: "road",
-        elementType: "labels"
-      },{
         featureType: "poi",
         stylers: [
           { visibility: "off" }
