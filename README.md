@@ -95,11 +95,12 @@ Phone Tag is spiteful and it hates you. Phone Tag will randomly activate monster
 
 # Development
 
-## Repo Orgnization
+## Repo Organization
 
 There are 2 repos. There is the [phone-tag](https://github.com/RebootJeff/phone-tag) repo and the [phone-tag-phonegap](https://github.com/RebootJeff/phone-tag) repo. The former contains server files and desktop browser client files (which should be generally be ignored). The latter contains files for a PhoneGap-generated client.
 
 ### phone-tag repo
+
 - app: (WIP)
   - controllers: (WIP) user authentication
   - models: (WIP) MongoDB schema
@@ -109,7 +110,9 @@ There are 2 repos. There is the [phone-tag](https://github.com/RebootJeff/phone-
 - public: front-end files for desktop browser client (maintenance of PhoneGap-based client takes priority over maintenance of this folder)
 - test: server-side tests
 - `server.js`: starts the server
+- 
 ### phone-tag-phonegap repo
+
 - .cordova, platforms, plugins: folders for PhoneGap to munch on
   - platforms/AndroidManifest.xml: most files in the 3 folders listed above don't need tweaking, but this one did (for location-related permissions)
 - www: source code/files
