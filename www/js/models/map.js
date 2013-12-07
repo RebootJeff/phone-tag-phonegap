@@ -260,7 +260,7 @@ define(['backbone'], function(Backbone){
       $('button.tag').prop('disabled',true);
       setTimeout(function(){
         clearInterval(timer);
-        $('button.tag').html('Tag');
+        $('button.tag').html('TAG');
         $('button.tag').prop('disabled',false);
       }, 10000);
       var count = 10;
