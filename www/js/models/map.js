@@ -126,7 +126,7 @@ define(['backbone'], function(Backbone){
       });
       this.playerIcon.url = 'img/evil.png';
       marker.setIcon(this.playerIcon);
-      marker.id = data.name;
+      marker.id = data.playerName;
       this.playerMarkers[marker.id] = marker;
       var that = this;
       if(marker.id === this.get('currentPlayer').get('name')){
@@ -212,15 +212,15 @@ define(['backbone'], function(Backbone){
     addPowerUpToMap: function(powerUp){
       var powerUpRadius;
       var title = powerUp.name;
+      var that = this;
 
       this.powerUpIcon.url = ('img/power.png');
 
       var myLatlng = new google.maps.LatLng(powerUp.location.lat, powerUp.location.lng);
-
       var marker = new google.maps.Marker({
         id: powerUp.id,
         position: myLatlng,
-        map: that.map,
+        map: this.map,
         title: title,
         icon: this.powerUpIcon
       });
@@ -251,8 +251,8 @@ define(['backbone'], function(Backbone){
       powerUpCircle = new google.maps.Circle(powerUpRadius);
       this.powerUpMarkers[marker.id] = {marker: marker, name: title, circle: powerUpCircle };
       if (!this.powerUpCounter) {
-        gen trackPowerUpTimer = setInterval(function(){
-          this.trackPowerUps();
+        var trackPowerUpTimer = setInterval(function(){
+          that.trackPowerUps();
         }, 1000);
       }
       this.powerUpCounter++;
@@ -262,7 +262,7 @@ define(['backbone'], function(Backbone){
       var marker;
       var player = this.get('currentPlayer');
       for (var powerUpID in this.powerUpMarkers) {
-        marker = this.powerUpMarkers[powerUpID];
+        marker = this.powerUpMarkers[0];
         this.setDistanceFromUser(marker);
         if( marker && marker.distanceFromCurrentPlayer <= marker.radius ){
           var data = { playerName: player.get('name'), gameID: player.get('gameID'), powerUpName: marker.title, powerUpID: marker.id };
