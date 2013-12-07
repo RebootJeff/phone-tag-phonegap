@@ -4,7 +4,7 @@ define(function(){
     <header class='header'> \
     </header> \
     <section class='content'> \
-      <h1>Loading</h1> \
+      <h1>Loading...</h1> \
       <img src='img/loading.gif'> \
     </section> \
   </section> \
@@ -13,10 +13,12 @@ define(function(){
     <section class='content'> \
     </section> \
     <aside class='menu closed'> \
+      <p>Quit</p> \
       <button class='topcoat-button quit'></button> \
+      <p>Re-center Map</p> \
       <button class='topcoat-button center-map'></button> \
       <p>Inventory</p> \
-      <button class='topcoat-button power-up'></button> \
+      <button class='topcoat-button power-up invincibility'></button> \
       <button class='topcoat-button toggle-menu'></button> \
     </aside> \
     <aside class='bottom-controls'> \
