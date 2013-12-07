@@ -98,6 +98,13 @@ table {
 .join {
   font-size: 1.5em;
 }
+.timer {
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  font-size: 1.5em;
+  color: #000;
+}
 .menu {
   height: 100%;
   width: 30%;
@@ -141,7 +148,7 @@ table {
 }
 .toggle-menu {
   position: absolute;
-  top: 0;
+  top: -0.5em;
   left: 100%;
   margin: 0;
   background-image: url("../img/menu/hamburger.png");
