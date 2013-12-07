@@ -11,7 +11,9 @@ define(function(){
   \
   <section id='game' class='page left'> \
     <section class='content'> \
+      <!-- This is where map is added --> \
     </section> \
+    <aside class='timer'>10:00</aside> \
     <aside class='menu closed'> \
       <p>Quit</p> \
       <button class='topcoat-button quit'></button> \
