@@ -52,13 +52,13 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
 
       this.socket.on('animateTag', function(data){
         that.get('map').tagAnimate(data.name);
-
+      });
       this.socket.on('sendPowerUp', function(data){
         that.addPowerUp(data);
       });
       this.socket.on('powerUpExpired', function(data){
         that.powerUpExpired(data);
-      })
+      });
       this.socket.on('playerDead', function(data){
         that.setPlayerDead(data);
       });
@@ -103,7 +103,7 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
 
     powerUpExpired: function(data){
       this.get('map').powerUpExpired(data);
-    }
+    },
 
     setPlayerDead: function(player, respawn){
       var currentPlayer = this.get('currentPlayer');
