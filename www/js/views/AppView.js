@@ -20,20 +20,21 @@ define(['backbone', 'Hammer', 'routers/MainRouter'], function(Backbone, Hammer, 
     hammerSetup: function(){
       var hammertime = this.$el.hammer();
       // Login events
-      hammertime.on('tap', 'a.logout', this.logout.bind(this));
+      hammertime.on('tap', 'button.logout', this.logout.bind(this));
 
       // View render events
-      hammertime.on('tap', 'a.home', this.renderHomeView.bind(this));
-      hammertime.on('tap', 'a.leaderboard', this.renderLeaderboardView.bind(this));
-      hammertime.on('tap', 'a.join', this.renderJoinView.bind(this));
-      hammertime.on('tap', 'a.game', this.renderGameView.bind(this));
+      hammertime.on('tap', 'button.home', this.renderHomeView.bind(this));
+      hammertime.on('tap', 'button.leaderboard', this.renderLeaderboardView.bind(this));
+      hammertime.on('tap', 'button.join', this.renderJoinView.bind(this));
+      hammertime.on('tap', 'button.game', this.renderGameView.bind(this));
 
       // Game events
       // hammertime.on('tap', 'button.start', this.sendStartGame.bind(this));
-      hammertime.on('tap', '#inventory li', this.powerUpInventory.bind(this));
+      // hammertime.on('tap', 'button.powerUp', this.powerUp.bind(this));
+      hammertime.on('tap', 'button.power-up', this.powerUpInventory.bind(this));
       hammertime.on('tap', 'button.tag', this.tag.bind(this));
-      hammertime.on('tap', 'button.powerUp', this.powerUp.bind(this));
-      hammertime.on('tap', 'button.inventory', this.renderInventoryView.bind(this));
+      hammertime.on('tap', 'button.toggle-menu', this.renderInventoryView.bind(this));
+      hammertime.on('swipeleft swiperight', '#map-canvas', this.renderInventoryView.bind(this));
       hammertime.on('tap', 'button.quit', this.quitGame.bind(this));
 
       // Map control events
@@ -106,7 +107,7 @@ define(['backbone', 'Hammer', 'routers/MainRouter'], function(Backbone, Hammer, 
 
     renderInventoryView: function(e){
       e && e.preventDefault();
-      this.router.navigate('/inventory', {trigger:true});
+      $('.menu').toggleClass('closed');
     },
 
     // checkAuth: function(){
@@ -131,7 +132,7 @@ define(['backbone', 'Hammer', 'routers/MainRouter'], function(Backbone, Hammer, 
       $('button.tag').prop('disabled',true);
       setTimeout(function(){
         clearInterval(timer);
-        $('button.tag').html('Tag');
+        $('button.tag').html('TAG');
         $('button.tag').prop('disabled',false);
       }, 15000);
       var count = 15;

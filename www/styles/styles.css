@@ -1,7 +1,7 @@
+@import "topcoat-mobile-light.css";
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Sans Serif';
   font-size: 20px;
   background-color: #000;
   color: #fff;
@@ -16,23 +16,6 @@ input[type='text'] {
   font-size: 1.5em;
   display: block;
   margin: auto;
-  padding: 0.5em;
-  color: #000;
-  background-color: #7fc7af;
-  border: 0;
-  border-radius: 8px;
-}
-::-webkit-input-placeholder {
-  color: #666;
-}
-:-moz-placeholder {
-  color: #666;
-}
-::-moz-placeholder {
-  color: #666;
-}
-:-ms-input-placeholder {
-  color: #666;
 }
 #container {
   position: absolute;
@@ -42,18 +25,26 @@ input[type='text'] {
   overflow: hidden;
 }
 a {
-  color: #7fc7af;
+  color: $color_light_blue;
   text-decoration: none;
   font-weight: bold;
 }
-button {
+.topcoat-button,
+.topcoat-button--large,
+.topcoat-button--cta,
+.topcoat-button--large--cta {
   font-size: 2em;
-  color: #000;
-  background-color: #7fc7af;
   border: 0;
-  border-radius: 8px;
   padding: 0.5em;
   margin: 0.5em;
+}
+.topcoat-button,
+.topcoat-button--large {
+  background-color: #96b8ff;
+}
+.topcoat-button--cta,
+.topcoat-button--large--cta {
+  background-color: #1b676b;
 }
 h1 {
   font-weight: 400;
@@ -101,25 +92,65 @@ table {
   -o-transition-duration: 0.25s;
   transition-duration: 0.25s;
 }
-#map-canvas {
-  position: absolute;
-  width: 100%;
-  height: 50%;
+.join {
+  font-size: 2em;
 }
-.modal {
-  height: 41%;
-  width: 100%;
+.menu {
+  height: 100%;
+  width: 30%;
   position: absolute;
-  top: 0;
+  left: 0;
   z-index: 11;
   background-color: #000;
   transition-property: all;
-  -webkit-transition-duration: 0.5s;
-  -moz-transition-duration: 0.5s;
-  -o-transition-duration: 0.5s;
-  transition-duration: 0.5s;
-  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  -webkit-transition-duration: 0.1s;
+  -moz-transition-duration: 0.1s;
+  -o-transition-duration: 0.1s;
+  transition-duration: 0.1s;
 }
-.modal.closed {
-  top: -50%;
+.menu .topcoat-button,
+.menu .topcoat-button--large {
+  width: 1.7em;
+  height: 1.7em;
+  line-height: 1;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.menu.closed {
+  left: -30%;
+}
+.quit {
+  background-image: url("../img/exit.png");
+}
+.center-map {
+  background-image: url("../img/map-center.png");
+}
+.power-up {
+  width: 1.5em;
+  height: 1.5em;
+  background-image: url("../img/map-center.png");
+}
+.toggle-menu {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin: 0;
+  background-image: url("../img/cabinet.png");
+}
+#map-canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.bottom-controls {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 20%;
+}
+.tag {
+  bottom: 2%;
+  width: 30%;
+  background-color: #c9001b;
+  color: #fff;
 }
