@@ -105,6 +105,10 @@ table {
   font-size: 1.5em;
   color: #000;
 }
+.gm-style-cc,
+.gmnoprint {
+  display: none;
+}
 .menu {
   height: 100%;
   width: 30%;
