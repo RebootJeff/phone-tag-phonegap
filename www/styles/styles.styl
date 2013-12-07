@@ -3,8 +3,11 @@
 // --------------------------------------------
 // color definitions
 
-$color_medium_turqoise = #189E9E
-$color_light_blue = #7FC7AF
+$color_pastel_sky = #96B8FF
+$color_medium_grass = #88C425
+$color_medium_moss = #25C43E
+$color_dark_grass = #519548
+$color_dark_teal = #1B676B
 $color_deep_red = #C9001B
 $color_placeholder_text = #666
 
@@ -38,14 +41,14 @@ input[type='text']
 // NOTE: These placeholder text styles won't work if combined into 1 multi-selector
 // Reference Source:
 //   http://stackoverflow.com/questions/2610497/change-an-inputs-html5-placeholder-color-with-css
-::-webkit-input-placeholder
-  color: $color_placeholder_text
-:-moz-placeholder
-  color: $color_placeholder_text
-::-moz-placeholder
-  color: $color_placeholder_text
-:-ms-input-placeholder
-  color: $color_placeholder_text
+// ::-webkit-input-placeholder
+//   color: $color_placeholder_text
+// :-moz-placeholder
+//   color: $color_placeholder_text
+// ::-moz-placeholder
+//   color: $color_placeholder_text
+// :-ms-input-placeholder
+//   color: $color_placeholder_text
 
 #container
   position: absolute
@@ -59,12 +62,17 @@ a
   text-decoration: none
   font-weight: bold
 
-.topcoat-button, .topcoat-button--large
+.topcoat-button, .topcoat-button--large, .topcoat-button--cta, .topcoat-button--large--cta
   font-size: 2em
   border: 0
   padding: 0.5em
   margin: 0.5em
-  background-color: $color_medium_turqoise
+
+.topcoat-button, .topcoat-button--large
+  background-color: $color_pastel_sky
+
+.topcoat-button--cta, .topcoat-button--large--cta
+  background-color: $color_dark_teal
 
 h1
   font-weight: 400
@@ -110,23 +118,65 @@ transition-duration(n)
   transition-duration(0.25s)
 
 // --------------------------------------------
+// "join" screen
+
+.join
+  font-size: 2em
+
+// --------------------------------------------
 // map
 
-.modal
-  height: 41%
-  width: 100%
+.menu
+  height: 100%
+  width: 30%
   position: absolute
-  top: 0
+  left: 0
   z-index: 11
   background-color: black
   transition-property: all
   transition-duration: .5s
   transition-timing-function: cubic-bezier(0, 1, 0.5, 1)
+  .topcoat-button, .topcoat-button--large
+    width: 1.7em
+    height: 1.7em
+    line-height: 1
+    background-repeat: no-repeat
+    background-position: center
 
-.modal.closed
-  top: -50%
+.menu.closed
+  left: -30%
+
+.quit
+  background-image: url('../img/exit.png')
+
+.center-map
+  background-image: url('../img/map-center.png')
+
+.power-up
+  width: 1.5em
+  height: 1.5em
+  background-image: url('../img/map-center.png')
+
+.toggle-menu
+  position: absolute
+  top: 0
+  left: 100%
+  margin: 0
+  background-image: url('../img/cabinet.png')
 
 #map-canvas
   position: absolute
   width: 100%
   height: 100%
+
+.bottom-controls
+  position: fixed
+  bottom: 0
+  width: 100%
+  height: 20%
+
+.tag
+  bottom: 2%
+  width: 30%
+  background-color: $color_deep_red
+  color: white
