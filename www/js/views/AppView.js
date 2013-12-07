@@ -30,18 +30,18 @@ define(['backbone', 'Hammer', 'routers/MainRouter'], function(Backbone, Hammer, 
 
       // Game events
       // hammertime.on('tap', 'button.start', this.sendStartGame.bind(this));
-      // hammertime.on('tap', 'button.powerUp', this.powerUp.bind(this));
-      hammertime.on('tap', 'button.power-up', this.powerUpInventory.bind(this));
+      hammertime.on('tap', 'button.power-up', this.powerUp.bind(this));
+      // hammertime.on('tap', 'button.power-up', this.powerUpInventory.bind(this));
       hammertime.on('tap', 'button.tag', this.tag.bind(this));
       hammertime.on('tap', 'button.toggle-menu', this.renderInventoryView.bind(this));
       hammertime.on('swipeleft swiperight', '#map-canvas', this.renderInventoryView.bind(this));
       hammertime.on('tap', 'button.quit', this.quitGame.bind(this));
 
       // Map control events
-      hammertime.on('tap', 'button.zoomOut', this.zoomOut.bind(this));
-      hammertime.on('tap', 'button.zoomIn', this.zoomIn.bind(this));
+      hammertime.on('pinchin', '#map-canvas', this.zoomOut.bind(this));
+      hammertime.on('pinchout', '#map-canvas', this.zoomIn.bind(this));
       hammertime.on('tap', 'button.toggleModal', this.toggleModal.bind(this));
-      hammertime.on('tap', 'button.centerMap', this.centerMap.bind(this));
+      hammertime.on('tap', 'button.center-map', this.centerMap.bind(this));
 
     // var container = $('#container');
     // Hammer(this.$el).on('tap','input', function(event){
@@ -172,6 +172,7 @@ define(['backbone', 'Hammer', 'routers/MainRouter'], function(Backbone, Hammer, 
 
     centerMap: function(e){
       e && e.preventDefault();
+      console.log("centerMap");
       this.model.get('currentGame').trigger('centerMap');
     }
 
