@@ -48,6 +48,9 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
       this.socket.on('renderScores', function(data){
         that.trigger('renderScores', data);
       });
+      this.socket.on('animateTag', function(data){
+        that.get('map').tagAnimate(data.name);
+      });
       // this.socket.on('sendLocationsToPlayer', function(data){
       //   that.updateLocations(data);
       // });
@@ -66,8 +69,9 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
     },
 
     tagPlayers: function(){
+      this.socket.emit('tag', {name: this.get('currentPlayer').get('name'), gameID: this.get('roomID')});
       this.get('map').checkPlayersToTag();
-      this.get('map').tagAnimate();
+      // this.get('map').tagAnimate();
     },
 
     powerUp: function(){
