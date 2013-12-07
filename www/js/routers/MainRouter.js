@@ -40,6 +40,7 @@ define(['backbone', '../views/GameView', '../models/game', '../views/HomeView', 
         new GameView({model: game, socket: game.socket});
         setTimeout(function(){
           that.slidePageFrom($('#loadingView'), $('#game'), 'left');
+          $('.tag').removeClass('hidden');
         }, 2000);
       }
     },
