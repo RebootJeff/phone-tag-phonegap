@@ -11,11 +11,12 @@ define(['backbone'], function(Backbone){
     // Map options
     mapOptions: {
       center: new google.maps.LatLng(37.7837749, -122.4167),
-      minZoom: 17,
-      maxZoom: 19,
+      minZoom: 19,
+      maxZoom: 21,
       draggable: false,
-      panControl: false,
-      zoomControl: false
+      // panControl: false,
+      // zoomControl: false,
+      disableDefaultUI: true
     },
 
     styles: [
@@ -33,7 +34,9 @@ define(['backbone'], function(Backbone){
         ]
       },{
         featureType: "road",
-        elementType: "labels",
+        elementType: "labels"
+      },{
+        featureType: "poi",
         stylers: [
           { visibility: "off" }
         ]
@@ -419,11 +422,11 @@ define(['backbone'], function(Backbone){
     },
 
     zoomOut: function(){
-      this.map.setZoom(17);
+      this.map.setZoom(19);
     },
 
     zoomIn: function(){
-      this.map.setZoom(19);
+      this.map.setZoom(21);
     },
 
     centerMap: function(){

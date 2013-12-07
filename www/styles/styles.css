@@ -95,6 +95,10 @@ table {
 .join {
   font-size: 2em;
 }
+.gm-style-cc,
+.gmnoprint {
+  display: none;
+}
 .menu {
   height: 100%;
   width: 30%;
