@@ -23,11 +23,10 @@ iOS 6+ or Android 4.0+
 
 ## Installation
 
-1. Install PhoneGap.
-2. Download/install Xcode for iOS phones or Android SDK for Android phones (this can be tough; blog post pending).
-3. Clone the [Phone Tag PhoneGap repo](https://github.com/RebootJeff/phone-tag-phonegap): `git clone https://github.com/RebootJeff/phone-tag-phonegap.git`.
-4. Use PhoneGap to build the smartphone app from the cloned repo: `phonegap local build ios(or android)`.
-5. Install the app compiled by PhoneGap.
+1. Clone the [Phone Tag PhoneGap repo](https://github.com/RebootJeff/phone-tag-phonegap): `git clone https://github.com/RebootJeff/phone-tag-phonegap.git`.
+2. Use Bower to download repo dependencies: `bower install`.
+3. Use PhoneGap to build the smartphone app from the cloned repo: `phonegap local build ios(or android)`.
+4. Install the app compiled by PhoneGap.
   1. iOS -- PhoneGap has built an Xcode project for you. Open it. Use Xcode to load the app onto your iPhone.
   2. Android -- Use Phonegap to install the app: `phonegap local install android`.
 
