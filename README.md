@@ -97,7 +97,7 @@ Phone Tag is spiteful and it hates you. Phone Tag will randomly activate monster
 
 ## Repo Organization
 
-There are 2 repos. There is the [phone-tag](https://github.com/RebootJeff/phone-tag) repo and the [phone-tag-phonegap](https://github.com/RebootJeff/phone-tag) repo. The former contains server files and desktop browser client files (which should be generally be ignored). The latter contains files for a PhoneGap-generated client.
+There are 2 repos. There is the [phone-tag](https://github.com/RebootJeff/phone-tag) repo and the [phone-tag-phonegap](https://github.com/RebootJeff/phone-tag) repo. The former contains server files and desktop browser client files (which should be generally ignored). The latter contains files for a PhoneGap-generated client.
 
 ### phone-tag repo
 
