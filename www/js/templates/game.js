@@ -5,7 +5,7 @@ define(function(){
     </header> \
     <section class='content'> \
       <h1>Loading</h1> \
-      <img src='img/loading.gif'> \
+      <img src='../styles/images/loading.gif'> \
     </section> \
   </section> \
   \
