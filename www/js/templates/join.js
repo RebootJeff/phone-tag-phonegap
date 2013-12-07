@@ -1,9 +1,9 @@
 define(function(){
-  return "<h1>Game</h1>" +
-  "<table>" +
-    "<tr>" +
-      "<th>Players</th>" +
-    "</tr>" +
-  "</table>" +
-  "<button class='start topcoat-button--large'>Start!</button>";
+  /*jshint multistr: true */
+  return "<p class='join'>Waiting for players...<br/>(Game will start automatically)</p> \
+  <table class='join'> \
+    <tr> \
+      <th>Players</th> \
+    </tr> \
+  </table>";
 });

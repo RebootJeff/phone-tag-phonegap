@@ -5,7 +5,7 @@ define(function(){
       <h1>Home</h1> \
     </header> \
     <section class='content'> \
-      <button class='join topcoat-button'>Join</button> \
+      <button class='join topcoat-button--cta'>Join</button> \
       <button class='leaderboard topcoat-button'>Leaderboard</button> \
       <button class='logout topcoat-button'>Logout</button> \
     </section> \
