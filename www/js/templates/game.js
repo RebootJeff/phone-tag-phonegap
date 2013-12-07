@@ -12,12 +12,12 @@ define(function(){
   <section id='game' class='page right'> \
     <section class='content'> \
     </section> \
-    <aside class='menu'> \
+    <aside class='menu closed'> \
       <button class='topcoat-button quit'></button> \
       <button class='topcoat-button center-map'></button> \
       <p>Inventory</p> \
       <button class='topcoat-button power-up'></button> \
-      <button class='topcoat-button toggle-menu closed'></button> \
+      <button class='topcoat-button toggle-menu'></button> \
     </aside> \
     <aside class='bottom-controls'> \
       <button class='topcoat-button tag'>TAG</button> \

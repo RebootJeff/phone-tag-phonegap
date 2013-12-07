@@ -179,15 +179,6 @@
   border-radius: 6px;
 }
 
-.topcoat-button:hover,
-.topcoat-button--quiet:hover,
-.topcoat-button--large:hover,
-.topcoat-button--large--quiet:hover,
-.topcoat-button-bar__button:hover,
-.topcoat-button-bar__button--large:hover {
-  background-color: #eff1f1;
-}
-
 .topcoat-button:focus,
 .topcoat-button--quiet:focus,
 .topcoat-button--quiet:hover:focus,
@@ -217,13 +208,6 @@
   background: transparent;
   border: 1px solid transparent;
   box-shadow: none;
-}
-
-.topcoat-button--quiet:hover,
-.topcoat-button--large--quiet:hover {
-  text-shadow: 0 1px #fff;
-  border: 1px solid #9daca9;
-  box-shadow: inset 0 1px #fff;
 }
 
 .topcoat-button--quiet:active,
@@ -260,11 +244,6 @@
   color: #fff;
   font-weight: 500;
   text-shadow: 0 -1px rgba(0,0,0,0.36);
-}
-
-.topcoat-button--cta:hover,
-.topcoat-button--large--cta:hover {
-  background-color: #4ca1e4;
 }
 
 .topcoat-button--cta:active,
@@ -604,13 +583,6 @@
   border-radius: 6px;
 }
 
-.topcoat-button:hover,
-.topcoat-button--quiet:hover,
-.topcoat-button--large:hover,
-.topcoat-button--large--quiet:hover {
-  background-color: #eff1f1;
-}
-
 .topcoat-button:focus,
 .topcoat-button--quiet:focus,
 .topcoat-button--quiet:hover:focus,
@@ -654,13 +626,6 @@
   background: transparent;
   border: 1px solid transparent;
   box-shadow: none;
-}
-
-.topcoat-button--quiet:hover,
-.topcoat-button--large--quiet:hover {
-  text-shadow: 0 1px #fff;
-  border: 1px solid #9daca9;
-  box-shadow: inset 0 1px #fff;
 }
 
 .topcoat-button--quiet:active,
@@ -754,11 +719,6 @@
   color: #fff;
   font-weight: 500;
   text-shadow: 0 -1px rgba(0,0,0,0.36);
-}
-
-.topcoat-button--cta:hover,
-.topcoat-button--large--cta:hover {
-  background-color: #4ca1e4;
 }
 
 .topcoat-button--cta:active,
@@ -1196,13 +1156,6 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   border-radius: 6px;
 }
 
-.topcoat-icon-button:hover,
-.topcoat-icon-button--quiet:hover,
-.topcoat-icon-button--large:hover,
-.topcoat-icon-button--large--quiet:hover {
-  background-color: #eff1f1;
-}
-
 .topcoat-icon-button:focus,
 .topcoat-icon-button--quiet:focus,
 .topcoat-icon-button--quiet:hover:focus,
@@ -1249,13 +1202,6 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   background: transparent;
   border: 1px solid transparent;
   box-shadow: none;
-}
-
-.topcoat-icon-button--quiet:hover,
-.topcoat-icon-button--large--quiet:hover {
-  text-shadow: 0 1px #fff;
-  border: 1px solid #9daca9;
-  box-shadow: inset 0 1px #fff;
 }
 
 .topcoat-icon-button--quiet:active,
