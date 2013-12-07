@@ -99,33 +99,33 @@ Phone Tag is spiteful and it hates you. Phone Tag will randomly activate monster
 
 There are 2 repos. There is the [phone-tag](https://github.com/RebootJeff/phone-tag) repo and the [phone-tag-phonegap](https://github.com/RebootJeff/phone-tag) repo. The former contains server files and desktop browser client files (which should be generally be ignored). The latter contains files for a PhoneGap-generated client.
 
-- phone-tag repo
-  - app: (WIP)
-    - controllers: (WIP) user authentication
-    - models: (WIP) MongoDB schema
-    - views: HTML meant for desktop browser client
-  - config: middleware setup, API, and other server settings
-    - socket: server-side game logic and socket 
-  - public: front-end files for desktop browser client (maintenance of PhoneGap-based client takes priority over maintenance of this folder)
-  - test: server-side tests
-  - `server.js`: starts the server
-- phone-tag-phonegap
-  - .cordova, platforms, plugins: folders for PhoneGap to munch on
-    - platforms/AndroidManifest.xml: most files in the 3 folders listed above don't need tweaking, but this one did (for location-related permissions)
-  - www: source code/files
-    - img: folder for icons
-    - js: app source code
-      - collections: Backbone collections
-      - models: Backbone models (client's game logic)
-      - routers: Backbone router
-      - templates: HTML templates as js files (to work around an issue of using RequireJS in PhoneGap)
-      - views: Backbone views (user interaction via Hammer.js)
-      - `main.js`: RequireJS configuration + Backbone app bootstrapper
-    - res: app branding
-    - spec: default PhoneGap testing files
-    - styles: CSS and Stylus source code
-    - `config.xml`: PhoneGap smartphone app settings
-    - `index.html`: Client starter (open a socket + load code via RequireJS)
+### phone-tag repo
+- app: (WIP)
+  - controllers: (WIP) user authentication
+  - models: (WIP) MongoDB schema
+  - views: HTML meant for desktop browser client
+- config: middleware setup, API, and other server settings
+  - socket: server-side game logic and socket 
+- public: front-end files for desktop browser client (maintenance of PhoneGap-based client takes priority over maintenance of this folder)
+- test: server-side tests
+- `server.js`: starts the server
+### phone-tag-phonegap repo
+- .cordova, platforms, plugins: folders for PhoneGap to munch on
+  - platforms/AndroidManifest.xml: most files in the 3 folders listed above don't need tweaking, but this one did (for location-related permissions)
+- www: source code/files
+  - img: folder for icons
+  - js: app source code
+    - collections: Backbone collections
+    - models: Backbone models (client's game logic)
+    - routers: Backbone router
+    - templates: HTML templates as js files (to work around an issue of using RequireJS in PhoneGap)
+    - views: Backbone views (user interaction via Hammer.js)
+    - `main.js`: RequireJS configuration + Backbone app bootstrapper
+  - res: app branding
+  - spec: default PhoneGap testing files
+  - styles: CSS and Stylus source code
+  - `config.xml`: PhoneGap smartphone app settings
+  - `index.html`: Client starter (open a socket + load code via RequireJS)
 
 ## The Technology
 
