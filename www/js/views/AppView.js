@@ -79,9 +79,9 @@ define(['backbone', 'Hammer', 'routers/MainRouter'], function(Backbone, Hammer, 
     quitGame: function(e){
       e && e.preventDefault();
       var gameID = this.model.get('currentGame').get('gameID');
-      var username = this.model.get('user');
-      var obj = { gameID: gameID, username: username };
-      this.model.socket.emit('leaveGame', obj);
+      var playerName = this.model.get('user');
+      var quitter = { gameID: gameID, playerName: playerName };
+      this.model.socket.emit('leaveGame', quitter);
       this.router.navigate('/', {trigger:true});
     },
 
