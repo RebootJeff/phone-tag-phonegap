@@ -24,10 +24,10 @@ define(['backbone', 'routers/MainRouter'], function(Backbone, Router){
 
       // Game events
       // 'click button.start': 'sendStartGame',
-      'click #inventory li': 'powerUpInventory',
+      'click button.power-up': 'powerUpInventory',
       'click button.tag': 'tag',
       'click button.powerUp': 'powerUp',
-      'click button.inventory': 'renderInventoryView',
+      'click button.toggle-menu': 'renderInventoryView',
       'click button.quit': 'quitGame',
       'renderGameViews': 'renderGameView',
 
@@ -91,7 +91,7 @@ define(['backbone', 'routers/MainRouter'], function(Backbone, Router){
 
     renderInventoryView: function(e){
       e && e.preventDefault();
-      this.router.navigate('/inventory', {trigger:true});
+      $('.menu').toggleClass('closed');
     },
 
     // checkAuth: function(){
@@ -116,7 +116,7 @@ define(['backbone', 'routers/MainRouter'], function(Backbone, Router){
       $('button.tag').prop('disabled',true);
       setTimeout(function(){
         clearInterval(timer);
-        $('button.tag').html('Tag');
+        $('button.tag').html('TAG');
         $('button.tag').prop('disabled',false);
       }, 15000);
       var count = 15;

@@ -10,7 +10,6 @@ define(['backbone', '../views/GameView', '../models/game', '../views/HomeView', 
       'leaderboard': 'leaderboard',
       'join': 'join',
       'game': 'game',
-      'inventory': 'inventory'
     },
 
     login: function(){
@@ -45,10 +44,6 @@ define(['backbone', '../views/GameView', '../models/game', '../views/HomeView', 
       } else {
         this.slidePageFrom($('#inventory'), $('#game'), 'left');
       }
-    },
-
-    inventory: function(){
-      this.slidePageFrom($('#game'), $('#inventory'), 'right');
     },
 
     slidePageFrom: function(start, end, slideDirection) {
