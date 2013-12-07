@@ -66,10 +66,13 @@ a
   font-size: 2em
   border: 0
   padding: 0.5em
-  margin: 0.5em
+  margin: 1em auto
+  display: block
 
 .topcoat-button, .topcoat-button--large
-  background-color: $color_pastel_sky
+  background-color: black
+  color: white
+  border: 1px solid white
 
 .topcoat-button--cta, .topcoat-button--large--cta
   background-color: $color_dark_teal
@@ -121,10 +124,17 @@ transition-duration(n)
 // "join" screen
 
 .join
-  font-size: 2em
+  font-size: 1.5em
 
 // --------------------------------------------
 // map
+
+.timer
+  position: fixed
+  text-align: center
+  width: 100%
+  font-size: 1.5em
+  color: black
 
 .menu
   height: 100%
@@ -132,13 +142,17 @@ transition-duration(n)
   position: absolute
   left: 0
   z-index: 11
-  background-color: black
+  background-color: rgba(0, 0, 0, 0.5)
   transition-property: all
   transition-duration(0.1s)
+  p
+    margin: 0.5em auto 0.25em auto
+    font-size: 0.9em
   .topcoat-button, .topcoat-button--large
     width: 1.7em
     height: 1.7em
     line-height: 1
+    margin: 0.5em auto
     background-repeat: no-repeat
     background-position: center
 
@@ -146,22 +160,22 @@ transition-duration(n)
   left: -30%
 
 .quit
-  background-image: url('../img/exit.png')
+  background-image: url('../img/menu/exit.png')
 
 .center-map
-  background-image: url('../img/map-center.png')
+  background-image: url('../img/menu/map-center.png')
 
-.power-up
-  width: 1.5em
-  height: 1.5em
-  background-image: url('../img/map-center.png')
+.power-up.invisibility
+    background-image: url('../img/menu/power-up-invisibility.png')
+.power-up.invincibility
+    background-image: url('../img/menu/power-up-invincibility.png')
 
 .toggle-menu
   position: absolute
-  top: 0
+  top: -0.5em
   left: 100%
   margin: 0
-  background-image: url('../img/cabinet.png')
+  background-image: url('../img/menu/hamburger.png')
 
 #map-canvas
   position: absolute
@@ -177,5 +191,8 @@ transition-duration(n)
 .tag
   bottom: 2%
   width: 30%
-  background-color: $color_deep_red
+  background-color: $color_dark_teal
   color: white
+
+.hidden
+  display: none
