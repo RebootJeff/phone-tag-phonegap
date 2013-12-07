@@ -41,7 +41,9 @@ a {
 }
 .topcoat-button,
 .topcoat-button--large {
-  background-color: #96b8ff;
+  background-color: #000;
+  color: #fff;
+  border: 1px solid #fff;
 }
 .topcoat-button--cta,
 .topcoat-button--large--cta {
