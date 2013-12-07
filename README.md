@@ -106,11 +106,11 @@ There are 2 repos. There is the [phone-tag](https://github.com/RebootJeff/phone-
   - models: (WIP) MongoDB schema
   - views: HTML meant for desktop browser client
 - config: middleware setup, API, and other server settings
-  - socket: server-side game logic and socket 
+  - socket: server-side game logic and socket
 - public: front-end files for desktop browser client (maintenance of PhoneGap-based client takes priority over maintenance of this folder)
 - test: server-side tests
 - `server.js`: starts the server
-- 
+
 ### phone-tag-phonegap repo
 
 - .cordova, platforms, plugins: folders for PhoneGap to munch on
