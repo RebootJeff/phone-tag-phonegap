@@ -39,10 +39,8 @@ define(['backbone', '../views/GameView', '../models/game', '../views/HomeView', 
         var that = this;
         new GameView({model: game, socket: game.socket});
         setTimeout(function(){
-          that.slidePageFrom($('#loadingView'), $('#game'), 'right');
+          that.slidePageFrom($('#loadingView'), $('#game'), 'left');
         }, 2000);
-      } else {
-        this.slidePageFrom($('#inventory'), $('#game'), 'left');
       }
     },
 
