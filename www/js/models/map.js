@@ -336,7 +336,7 @@ define(['backbone'], function(Backbone){
       var count = 10;
       var timer = setInterval(function(){
         count--;
-        $('button.tag').html('You died - '+count);
+        $('button.tag').html(count);
       }, 1000);
     },
 
@@ -399,11 +399,11 @@ define(['backbone'], function(Backbone){
     },
 
     zoomOut: function(){
-      this.map.setZoom(19);
+      this.map.setZoom(17);
     },
 
     zoomIn: function(){
-      this.map.setZoom(21);
+      this.map.setZoom(19);
     },
 
     centerMap: function(){
