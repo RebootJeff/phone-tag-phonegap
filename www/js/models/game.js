@@ -105,17 +105,17 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
       this.get('map').powerUpExpired(data);
     },
 
-    setPlayerDead: function(player, respawn){
+    setPlayerDead: function(data){
       var currentPlayer = this.get('currentPlayer');
-      if (player.name === currentPlayer.get('name')){
+      if (data.name === currentPlayer.get('name')){
         currentPlayer.set('isAlive', false);
-        this.get('map').addPowerUpToMap(respawn);
+        // this.get('map').addPowerUpToMap(data.respawn);
       }
       var deadPlayer = this.get('otherPlayers').find(function(model){
-        return model.get('name') === player.name;
+        return model.get('name') === data.name;
       });
       deadPlayer.set('isAlive', false);
-      this.get('map').setPlayerDead(player.name);
+      this.get('map').setPlayerDead(data.name);
     }
     // updateLocations: function(data){
     //   var players = this.get('otherPlayers').models;
