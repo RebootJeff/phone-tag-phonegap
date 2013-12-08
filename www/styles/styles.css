@@ -98,6 +98,13 @@ table {
 .join {
   font-size: 1.5em;
 }
+.loading-text {
+  margin: 0.5em;
+  font-size: 1.2em;
+}
+.instructions li {
+  text-align: left;
+}
 .gm-style-cc,
 .gmnoprint {
   display: none;
