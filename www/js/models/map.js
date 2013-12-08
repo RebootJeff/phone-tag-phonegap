@@ -14,8 +14,6 @@ define(['backbone'], function(Backbone){
       minZoom: 19,
       maxZoom: 21,
       draggable: false,
-      // panControl: false,
-      // zoomControl: false,
       disableDefaultUI: true
     },
 
@@ -46,14 +44,31 @@ define(['backbone'], function(Backbone){
       maximumAge: 5000
     },
 
+    // Markers
     playerMarkers: {},
     powerUpMarkers: {},
     powerUpCounter: 0,
 
+    // Marker icons
     playerIcon: {
       size: new google.maps.Size(25, 25),
       origin: new google.maps.Point(0,0),
-      anchor: new google.maps.Point(12, 12)
+      anchor: new google.maps.Point(12, 12),
+      url: 'img/map/player-alive.png'
+    },
+
+    enemyIcon: {
+      size: new google.maps.Size(25, 25),
+      origin: new google.maps.Point(0,0),
+      anchor: new google.maps.Point(12, 12),
+      url: 'img/map/player-enemy.png'
+    },
+
+    deadIcon: {
+      size: new google.maps.Size(25, 25),
+      origin: new google.maps.Point(0,0),
+      anchor: new google.maps.Point(12, 12),
+      url: 'img/map/player-dead.png'
     },
 
     powerUpIcon: {
@@ -72,16 +87,15 @@ define(['backbone'], function(Backbone){
 
     socketSetup: function(){
       var that = this;
-      this.get('socket').on('createMarker', function(data){that.createMarker(data);});
-      this.get('socket').on('sendLocationsToPlayer', function(data){that.updateMarkers(data);});
-      // this.get('socket').on('playerAlive', function(data){that.setPlayerAlive(data);});
-      // this.get('socket').on('playerDead', function(data){that.setPlayerDead(data);});
-      // this.get('socket').on('addPowerUpToMap', function(data){ that.addPowerUpToMap(data); });
-      this.get('socket').on('addPacmanToMap', function(data){ that.generatePacman(data); });
-      this.get('socket').on('removePowerUpFromMap', function(data){ that.removePowerUpFromMap(data); });
-      this.get('socket').on('someoneLeft', function(data){ that.removeMarker(data); });
-      this.get('socket').on('someonePoweredUp', function(data){ that.hideMarker(data); });
-      this.get('socket').on('sendRespawn', function(data){ that.sendRespawn(data); });
+      this.get('socket').on('createMarker', that.createMarker.bind(that));
+      this.get('socket').on('sendLocationsToPlayer', that.updateMarkers.bind(that));
+      // this.get('socket').on('playerAlive', that.setPlayerAlive.bind(that));
+      // this.get('socket').on('playerDead', that.setPlayerDead.bind(that));
+      // this.get('socket').on('addPowerUpToMap', that.addPowerUpToMap.bind(that));
+      this.get('socket').on('addPacmanToMap', that.generatePacman.bind(that));
+      this.get('socket').on('removePowerUpFromMap', that.removePowerUpFromMap.bind(that));
+      this.get('socket').on('someoneLeft', that.removeMarker.bind(that));
+      this.get('socket').on('someonePoweredUp', that.hideMarker.bind(that));
     },
 
     handleError: function(err){
@@ -90,9 +104,7 @@ define(['backbone'], function(Backbone){
 
     watchLocation: function(marker){
       var that = this;
-
       var watchCurrentPosition = function(position){
-        console.log("watchCurrentPosition is getting called");
         var socket = that.get('socket');
         var currentPosition = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
@@ -101,7 +113,6 @@ define(['backbone'], function(Backbone){
         playerLocation.gameID = that.get('currentPlayer').get('gameID');
         playerLocation.location = {lat: position.coords.latitude, lng:position.coords.longitude};
 
-        that.currentPlayerMarker = marker;
         that.map.panTo(currentPosition);
         marker.setPosition(currentPosition);
         socket.emit('sendLocationFromPlayer', playerLocation);
@@ -122,18 +133,18 @@ define(['backbone'], function(Backbone){
         position: latLng,
         map: this.map,
         visible: false,
-        icon: this.playerIcon
+        icon: this.enemyIcon
       });
-      this.playerIcon.url = 'img/map/player-enemy.png';
-      marker.setIcon(this.playerIcon);
+
+      marker.setIcon(this.enemyIcon);
       marker.id = data.playerName;
       this.playerMarkers[marker.id] = marker;
       var that = this;
       if(marker.id === this.get('currentPlayer').get('name')){
         this.watchLocation(marker);
         marker.setVisible(true);
-        this.playerIcon.url = 'img/map/player-alive.png';
         marker.setIcon(this.playerIcon);
+        this.currentPlayerMarker = marker;
       }else{
         setInterval(function(){that.markerRadarDisplay(marker);}, 5000);
       }
@@ -161,52 +172,43 @@ define(['backbone'], function(Backbone){
     },
 
     updateMarkers: function(locations){
-      var marker;
-      for(var playerName in this.playerMarkers){
-        marker = this.playerMarkers[playerName];
-        if(marker.id !== this.get('currentPlayer').get('name')){
-          marker.setPosition(new google.maps.LatLng(locations[marker.id].lat, locations[marker.id].lng));
+      var marker, location;
+
+      // Loop through all players sent by the server and update their location
+      for(var player in locations){
+        marker = this.playerMarkers[player];
+        location = locations[player];
+
+        // Make sure not to update current player - current position is tracked with watchLocation
+        // Update location if there is a lat and lng sent
+        if(marker.id !== this.get('currentPlayer').get('name') && location.lat && location.lng){
+          marker.setPosition(new google.maps.LatLng(location.lat, location.lng));
           this.setDistanceFromUser(marker);
           console.log('distance from current player is: ', marker.distanceFromCurrentPlayer);
-          if(locations[marker.id]){
-            marker.setPosition(new google.maps.LatLng(locations[marker.id].lat, locations[marker.id].lng));
-          }
         }
       }
     },
 
     setDistanceFromUser: function(marker){
-      marker.distanceFromCurrentPlayer = google.maps.geometry.spherical.computeDistanceBetween(this.currentPlayerMarker.position, marker.position);
+      if(this.currentPlayerMarker){
+        marker.distanceFromCurrentPlayer = google.maps.geometry.spherical.computeDistanceBetween(this.currentPlayerMarker.position, marker.position);
+      }
     },
 
     removeMarker: function(data){
       var playerName = data.name;
-      var newLocations = data.newLocations;
-      var markers = this.playerMarkers;
-      for( var playerName in this.playerMarkers ){
-        var marker = this.playerMarkers[playerName];
-        if( marker.id === playerName ){
-          marker.setMap(null);
-          delete this.playerMarkers[marker];
-        }
-      }
-      this.updateMarkers(newLocations);
+      var marker = this.playerMarkers[playerName];
+
+      marker.setMap(null);
+      delete this.playerMarkers[playerName];
+      this.updateMarkers(data.newLocations);
     },
 
     hideMarker: function(data){
       var playerName = data;
-      var markers = this.playerMarkers;
-      var map = this.map;
-      for( var i = 0; i < markers.length; i++ ){
-        var marker = markers[i];
-        if( marker.id === playerName ){
-          marker.setMap(null);
-          setTimeout(function(){
-            console.log("10 SECS");
-            marker.setMap(map);
-          }, 10000);
-        }
-      }
+      var marker = this.playerMarkers[playerName];
+      marker.setMap(null);
+      setTimeout(function(){ marker.setMap(this.map); }, 10000);
     },
 
     addPowerUpToMap: function(powerUp){
@@ -248,11 +250,12 @@ define(['backbone'], function(Backbone){
         };
       }
 
-      powerUpCircle = new google.maps.Circle(powerUpRadius);
-      this.powerUpMarkers[marker.id] = {marker: marker, name: title, circle: powerUpCircle };
+      marker.powerUpCircle = new google.maps.Circle(powerUpRadius);
+      marker.powerUpName = title;
+      this.powerUpMarkers[marker.id] = marker;
       if (!this.powerUpCounter) {
         var trackPowerUpTimer = setInterval(function(){
-          that.trackPowerUps();
+          // that.trackPowerUps();
         }, 1000);
       }
       this.powerUpCounter++;
@@ -262,13 +265,14 @@ define(['backbone'], function(Backbone){
       var marker;
       var player = this.get('currentPlayer');
       for (var powerUpID in this.powerUpMarkers) {
-        marker = this.powerUpMarkers[0];
+
+        marker = this.powerUpMarkers[powerUpID];
         this.setDistanceFromUser(marker);
         if( marker && marker.distanceFromCurrentPlayer <= marker.radius ){
           var data = { playerName: player.get('name'), gameID: player.get('gameID'), powerUpName: marker.title, powerUpID: marker.id };
           if (marker.title === 'respawn') {
             this.setPlayerAlive();
-            this.get('socket').emit('playerRevived', data);
+            this.get('socket').emit('playerRespawn', data);
           } else {
             this.get('socket').emit('addItemToPlayer', data);
           }
@@ -278,9 +282,9 @@ define(['backbone'], function(Backbone){
 
     alive: true,
 
-    generatePacman: function(location){
-      var latLng = new google.maps.LatLng(location.lat, location.lng),
-          direction = location.direction,
+    generatePacman: function(pacMan){
+      var latLng = new google.maps.LatLng(pacMan.location.lat, pacMan.location.lng),
+          direction = pacMan.direction,
           movement = {},
           icon = {},
           distance,
@@ -321,11 +325,11 @@ define(['backbone'], function(Backbone){
 
       }, 50);
 
-      // Remove pacman after 10 seconds
+      // Remove pacman after 4 seconds
       setTimeout(function(){
         clearInterval(timer);
         that.pacmanMarker.setMap(null);
-      }, 4000);
+      }, 10000);
     },
 
     removePowerUpFromMap: function(data){
@@ -350,6 +354,7 @@ define(['backbone'], function(Backbone){
           marker.id !== currentPlayer.get('name');
       };
 
+      // Loop through all players to see if they are tagable
       for(var playerName in this.playerMarkers){
         marker = this.playerMarkers[playerName];
         if(checkValidTag(marker, this.get('currentPlayer'))){
@@ -371,15 +376,13 @@ define(['backbone'], function(Backbone){
           that = this,
           radius = 0,
           marker;
+
       if(name && name !== this.get('currentPlayer').get('name')){
-        for(var i = 0; i < this.markers.length; i++){
-          marker = this.markers[i];
-          if(marker.id === name){
-            center = marker.position;
-            strokeColor = '#3777D8';
-          }
-        }
+        marker = this.playerMarkers[name];
+        center = marker.position;
+        strokeColor = '#3777D8';
       }
+
       var circleOptions = {
         strokeColor: strokeColor,
         strokeOpacity: 0.8,
@@ -415,36 +418,18 @@ define(['backbone'], function(Backbone){
       }, 1000);
     },
 
-    setPlayerDead: function(player){
-      var marker;
-      this.playerIcon.url = 'img/map/player-dead.png';
-      if(player.name === this.get('currentPlayer').get('name')){
+    setPlayerDead: function(name){
+      if(name === this.get('currentPlayer').get('name')){
         this.tagCountdown();
-        return this.currentPlayerMarker.setIcon(this.playerIcon);
       }
-      for(var playerName in this.playerMarkers){
-        marker = this.playerMarkers[playerName];
-        if(marker.id === player.name){
-          marker.setIcon(this.playerIcon);
-          return;
-        }
-      }
+      this.playerMarkers[name].setIcon(this.deadIcon);
     },
 
     setPlayerAlive: function(player){
-      var marker;
       if(player.name === this.get('currentPlayer').get('name')){
-        this.playerIcon.url = 'img/map/player-alive.png';
         return this.currentPlayerMarker.setIcon(this.playerIcon);
       }
-
-      for(var playerName in this.playerMarkers){
-        marker = this.playerMarkers[playerName];
-        if(marker.id === player.name){
-          this.playerIcon.url = 'img/map/player-enemy.png';
-          return marker.setIcon(this.playerIcon);
-        }
-      }
+      this.playerMarkers[player].setIcon(this.enemyIcon);
     },
 
     markerRadarDisplay: function(marker){
