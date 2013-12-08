@@ -14,7 +14,6 @@ define(['backbone', 'handlebars', '../templates/game','./MapView'], function(Bac
       var secToStart, timeLeft, minLeft, secLeft;
       var startTime = this.model.endTime - (this.model.get('timeLimit') * 60 * 1000);
       var that = this;
-      $('#container').append('<div class="timer"></div>');
       var gameTimer = setInterval(function(){
         if (Date.now() >= startTime && Date.now() < that.model.endTime) {
           timeLeft = that.model.endTime - Date.now();
