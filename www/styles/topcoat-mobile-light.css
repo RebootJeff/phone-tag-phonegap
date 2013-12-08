@@ -3471,29 +3471,6 @@ input[type="search"]::-webkit-search-cancel-button {
   color: #454545;
 }
 
-@font-face {
-  font-family: "Geared Slab";
-  src: url("font/GearedSlab.ttf");
-}
-
-@font-face {
-  font-family: "Geared Slab";
-  src: url("font/GearedSlab-Light.ttf");
-  font-weight: 200;
-}
-
-@font-face {
-  font-family: "Geared Slab";
-  src: url("font/GearedSlab-Bold.ttf");
-  font-weight: 600;
-}
-
-@font-face {
-  font-family: "Geared Slab";
-  src: url("font/GearedSlab-Extrabold.ttf");
-  font-weight: 800;
-}
-
 body {
   margin: 0;
   padding: 0;
