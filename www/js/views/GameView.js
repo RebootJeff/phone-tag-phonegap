@@ -36,7 +36,8 @@ define(['backbone', 'handlebars', '../templates/game','./MapView'], function(Bac
 
     renderScores: function(data){
       _.map(data, function(player){
-        $('.timer').append('<li>'+player.name+': '+player.score+' tags</li>');
+        $('.timer').append('<ul></ul>');
+        $('.timer ul').append('<li>'+player.name+': '+player.score+' tags</li>');
       });
     },
 
