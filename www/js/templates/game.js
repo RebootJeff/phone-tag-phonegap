@@ -4,8 +4,18 @@ define(function(){
     <header class='header'> \
     </header> \
     <section class='content'> \
-      <h1>Loading...</h1> \
+      <h1>Switching GPS to fun mode...</h1> \
       <img src='img/loading.gif'> \
+      <aside class='loading-text'> \
+        Instructions: \
+        <ul class='instructions'> \
+          <li>Run within <strong>10 meters</strong> to hit enemies with your tag button</li> \
+          <li>Run to the blue circle after getting tagged</li> \
+          <li>Run to green icons (power-ups!)</li> \
+          <li>Swipe right/left to use menu</li> \
+          <li>Run <strong>away</strong> from Pac-Man</li> \
+        </ul> \
+      </aside> \
     </section> \
   </section> \
   \
