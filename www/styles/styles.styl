@@ -12,20 +12,49 @@ $color_deep_red = #C9001B
 $color_placeholder_text = #666
 
 // --------------------------------------------
+// font setup
+
+@font-face {
+  font-family: "Geared Slab";
+  src: url("font/GearedSlab.ttf");
+}
+
+@font-face {
+  font-family: "Geared Slab";
+  src: url("font/GearedSlab-Light.ttf");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Geared Slab";
+  src: url("font/GearedSlab-Bold.ttf");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Geared Slab";
+  src: url("font/GearedSlab-Extrabold.ttf");
+  font-weight: 800;
+}
+
+// --------------------------------------------
 // universal styles
 
 body
   margin: 0
   padding: 0
-  // font-family: 'Sans Serif'
-  font-size: 20px
-  background-color: black
+  font-family: 'Geared Slab'
+  font-size: 24px
   color: white
   position: absolute
   top: 0
   left: 0
   bottom: 0
   right: 0
+  background: black
+
+h1
+  font-weight: 800
 
 input[type='text']
   width: 80%
