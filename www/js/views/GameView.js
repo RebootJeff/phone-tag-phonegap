@@ -22,12 +22,12 @@ define(['backbone', 'handlebars', '../templates/game','./MapView'], function(Bac
           if (secLeft < 10) {
             secLeft = '0'+secLeft;
           }
-          $('.timer').html('<p>'+minLeft+':'+secLeft+'</p>');
+          $('.timer').html(minLeft+':'+secLeft);
         } else if (Date.now() < startTime) {
           secToStart = Math.floor((startTime - Date.now()) / 1000);
-          $('.timer').html('<p>Game starting in '+secToStart+' seconds.</p>');
+          $('.timer').html('Game starting in '+secToStart+' seconds.');
         } else {
-          $('.timer').html('<p>0:00</p>');
+          $('.timer').html('0:00');
           clearInterval(gameTimer);
           that.model.endGame();
         }
