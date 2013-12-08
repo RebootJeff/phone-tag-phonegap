@@ -62,7 +62,7 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
       this.socket.on('playerDead', function(data){
         that.setPlayerDead(data);
       });
-      this.socket.on('playerAlive', function(data){
+      this.socket.on('playerRevived', function(data){
         that.setPlayerAlive(data);
       });
       // this.socket.on('sendLocationsToPlayer', function(data){
@@ -116,6 +116,10 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
       });
       deadPlayer.set('isAlive', false);
       this.get('map').setPlayerDead(player.name);
+    },
+
+    setPlayerAlive: function(player){
+      this.get('map').setPlayerAlive(player.name);
     }
     // updateLocations: function(data){
     //   var players = this.get('otherPlayers').models;
