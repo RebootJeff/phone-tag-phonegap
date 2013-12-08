@@ -268,7 +268,7 @@ define(['backbone'], function(Backbone){
           var data = { playerName: player.get('name'), gameID: player.get('gameID'), powerUpName: marker.title, powerUpID: marker.id };
           if (marker.title === 'respawn') {
             this.setPlayerAlive();
-            this.get('socket').emit('playerRevived', data);
+            this.get('socket').emit('playerRespawn', data);
           } else {
             this.get('socket').emit('addItemToPlayer', data);
           }
@@ -326,7 +326,7 @@ define(['backbone'], function(Backbone){
       setTimeout(function(){
         clearInterval(timer);
         that.pacmanMarker.setMap(null);
-      }, 4000);
+      }, 10000);
     },
 
     removePowerUpFromMap: function(data){
