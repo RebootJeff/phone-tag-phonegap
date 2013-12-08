@@ -1,8 +1,6 @@
 define(function(){
   /*jshint multistr: true */
   return "<section id='loadingView' class='page center'> \
-    <header class='header'> \
-    </header> \
     <section class='content'> \
       <h1>Switching GPS to fun mode...</h1> \
       <img src='img/loading.gif'> \
