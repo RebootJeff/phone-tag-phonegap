@@ -344,9 +344,15 @@ define(['backbone'], function(Backbone){
           player,
           response;
 
+      var checkValidTag = function(marker, currentPlayer){
+        return marker.distanceFromCurrentPlayer < 10 &&
+          // is the marker currently invincible? &&
+          marker.id !== currentPlayer.get('name');
+      };
+
       for(var playerName in this.playerMarkers){
         marker = this.playerMarkers[playerName];
-        if(marker.distanceFromCurrentPlayer < 10 && marker.id !== this.get('currentPlayer').get('name')){
+        if(checkValidTag(marker, this.get('currentPlayer'))){
           player = {playerName: marker.id, gameID: this.get('currentPlayer').get('gameID')};
           tagged.push(player);
         }
