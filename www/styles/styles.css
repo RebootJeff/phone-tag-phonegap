@@ -98,6 +98,10 @@ table {
 .join {
   font-size: 1.5em;
 }
+.gm-style-cc,
+.gmnoprint {
+  display: none;
+}
 .timer {
   position: fixed;
   text-align: center;
@@ -105,9 +109,9 @@ table {
   font-size: 1.5em;
   color: #000;
 }
-.gm-style-cc,
-.gmnoprint {
-  display: none;
+.timer ul {
+  padding: 0;
+  list-style: none;
 }
 .menu {
   height: 100%;
@@ -115,7 +119,7 @@ table {
   position: absolute;
   left: 0;
   z-index: 11;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0,0,0,0.5);
   transition-property: all;
   -webkit-transition-duration: 0.1s;
   -moz-transition-duration: 0.1s;
