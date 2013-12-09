@@ -19,7 +19,9 @@ Phone Tag is a smartphone geolocation-based game. Players use the game's map to 
 
 ## Requirements
 
-iOS 6+ or Android 4.0+
+- Smartphones: iOS 6+ or Android 4.0+
+- Friends: nearby, multiple
+- Dev tools: PhoneGap, iOS/Android SDK, Apache Ant, etc (if installing from repo)
 
 ## Installation
 
@@ -98,7 +100,7 @@ Phone Tag is spiteful and it hates you. Phone Tag will randomly activate monster
 
 There are 2 repos. There is the [phone-tag](https://github.com/RebootJeff/phone-tag) repo and the [phone-tag-phonegap](https://github.com/RebootJeff/phone-tag) repo. The former contains server files and desktop browser client files (which should be generally ignored). The latter contains files for a PhoneGap-generated client.
 
-### phone-tag repo
+### phone-tag repo (server-side files)
 
 - app: (WIP)
   - controllers: (WIP) user authentication
@@ -110,7 +112,7 @@ There are 2 repos. There is the [phone-tag](https://github.com/RebootJeff/phone-
 - test: server-side tests
 - `server.js`: starts the server
 
-### phone-tag-phonegap repo
+### phone-tag-phonegap repo (client-side files)
 
 - .cordova, platforms, plugins: folders for PhoneGap to munch on
   - platforms/AndroidManifest.xml: most files in the 3 folders listed above don't need tweaking, but this one did (for location-related permissions)
