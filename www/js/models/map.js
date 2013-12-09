@@ -318,7 +318,6 @@ define(['backbone'], function(Backbone){
             powerUpID: marker.id
           };
           if (marker.title === 'respawn') {
-            this.setPlayerAlive(data.playerName);
             this.get('socket').emit('playerRespawn', data);
           } else {
             this.get('socket').emit('addItemToPlayer', data);
