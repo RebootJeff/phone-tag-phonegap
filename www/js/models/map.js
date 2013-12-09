@@ -1,5 +1,5 @@
 define(['backbone'], function(Backbone){
-  var map = Backbone.Model.extend({
+  var Map = Backbone.Model.extend({
 
     initialize: function(options){
       google.maps.visualRefresh = true;
@@ -289,7 +289,7 @@ define(['backbone'], function(Backbone){
 
         marker = this.powerUpMarkers[powerUpID];
 
-        checkDistance(marker, this.currentPlayerMarker, marker.radius)){
+        if(this.checkDistance(marker, this.currentPlayerMarker, marker.radius)){
           var data = { playerName: player.get('name'), gameID: player.get('gameID'), powerUpName: marker.title, powerUpID: marker.id };
           if (marker.title === 'respawn') {
             this.setPlayerAlive(data.playerName);
@@ -341,7 +341,7 @@ define(['backbone'], function(Backbone){
         // Determine if Pacman killed the current user
         if(that.currentPlayer.get('alive') &&
           !that.currentPlayer.get('invincible') &&
-          checkDistance(that.pacmanMarker, that.currentPlayerMarker, 22)){
+          this.checkDistance(that.pacmanMarker, that.currentPlayerMarker, 22)){
             var response = {};
             response.playerName = currentPlayer.get('name');
             response.gameID = currentPlayer.get('gameID');
@@ -385,7 +385,7 @@ define(['backbone'], function(Backbone){
       for(var playerName in this.playerMarkers){
         playerMarker = this.playerMarkers[playerName];
         if(playerName !== currentPlayer.get('name') &&
-          checkDistance(playerMarker, this.currentPlayerMarker, 10)){
+          this.checkDistance(playerMarker, this.currentPlayerMarker, 10)){
             player = {playerName: playerName, gameID: currentPlayer.get('gameID')};
             tagged.push(player);
         }
@@ -492,5 +492,5 @@ define(['backbone'], function(Backbone){
       this.map.setCenter(this.currentPlayerMarker.position);
     }
   });
-  return map;
+  return Map;
 });
