@@ -35,9 +35,12 @@ define(['backbone', 'handlebars', '../templates/game','./MapView'], function(Bac
     },
 
     renderScores: function(data){
-      _.map(data, function(player){
-        $('.timer').append('<ul></ul>');
-        $('.timer ul').append('<li>'+player.name+': '+player.score+' tags</li>');
+      var that = this;
+      $('#container').append('<section class="scoreboard"></section>');
+      $('#container').append('<section class="modalMask"></section>');
+      $('.scoreboard').append('<table><tr><th>Name</th><th>Score</th><th>Kills</th><th>Deaths</th><th>Attempted Tags</th><th>Tags/min</th></tr></table>');
+      _.each(data.players, function(player){
+        $('.scoreboard tbody').append('<tr><td>' + player.name + '</td><td>' + player.score + '</td><td>' + player.kills + '</td><td>' + player.deaths + '</td><td>' + player.totalTags + '</td></tr>');
       });
     },
 

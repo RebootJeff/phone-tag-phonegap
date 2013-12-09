@@ -425,7 +425,7 @@ define(['backbone'], function(Backbone){
       var timer = setInterval(function(){
         radius+=0.25;
         that.circle.setRadius(radius);
-        if(radius >= 22){
+        if(radius >= 10){
           clearInterval(timer);
           that.circle.setMap(null);
         }

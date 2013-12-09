@@ -83,7 +83,7 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
     },
 
     tagPlayers: function(){
-      this.socket.emit('tag', {playerName: this.get('currentPlayer').get('name'), gameID: this.get('roomID')});
+      this.socket.emit('tag', {playerName: this.get('currentPlayer').get('name'), gameID: this.get('gameID')});
       this.get('map').checkPlayersToTag();
       // this.get('map').tagAnimate();
     },
