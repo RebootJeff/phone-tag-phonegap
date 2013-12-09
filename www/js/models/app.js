@@ -2,7 +2,7 @@ define(['backbone'], function(Backbone){
   var App = Backbone.Model.extend({
     initialize: function(){
       var that = this;
-      this.socket = io.connect('http://localhost:3000');
+      this.socket = io.connect('http://hadooken.herokuapp.com');
       this.on('setUser', this.setUser, this);
       this.socket.on('renderGameViews', function(data){
         that.renderGameViews(data, that);
