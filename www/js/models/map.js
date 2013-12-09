@@ -339,8 +339,8 @@ define(['backbone'], function(Backbone){
         newPosition = new google.maps.LatLng(that.pacmanMarker.position.ob, that.pacmanMarker.position.pb + movement[direction]);
         that.pacmanMarker.setPosition(newPosition);
         // Determine if Pacman killed the current user
-        if(that.currentPlayer.get('alive') &&
-          !that.currentPlayer.get('invincible') &&
+        if(currentPlayer.get('alive') &&
+          !currentPlayer.get('invincible') &&
           this.checkDistance(that.pacmanMarker, that.currentPlayerMarker, 22)){
             var response = {};
             response.playerName = currentPlayer.get('name');
@@ -383,6 +383,8 @@ define(['backbone'], function(Backbone){
       for(var playerName in this.playerMarkers){
         playerMarker = this.playerMarkers[playerName];
         if(playerName !== currentPlayer.get('name') &&
+          // check if player is invincible &&
+          // check if player is dead already &&
           this.checkDistance(playerMarker, this.currentPlayerMarker, 10)){
             player = {playerName: playerName, gameID: currentPlayer.get('gameID')};
             tagged.push(player);
@@ -435,7 +437,9 @@ define(['backbone'], function(Backbone){
       setTimeout(function(){
         clearInterval(timer);
         $('button.tag').html('TAG');
-        $('button.tag').prop('disabled', false);
+        if(this.get('currentPlayer').get('alive')){
+          $('button.tag').prop('disabled', false);
+        }
       }, 10000);
       var count = 10;
       var timer = setInterval(function(){
