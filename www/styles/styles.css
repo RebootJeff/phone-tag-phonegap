@@ -151,7 +151,7 @@ table {
   position: absolute;
   left: 0;
   z-index: 11;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.7);
   transition-property: all;
   -webkit-transition-duration: 0.1s;
   -moz-transition-duration: 0.1s;
@@ -215,7 +215,7 @@ table {
 }
 .scoreboard {
   opacity: 0.6;
-  background-color: #008605;
+  background-color: #1b676b;
   position: fixed;
   top: 10%;
   left: 10%;
@@ -224,9 +224,25 @@ table {
   width: 80%;
   height: 80%;
   z-index: 11;
+  overflow: auto;
+}
+.scoreboard table {
+  border-collapse: collapse;
+}
+.scoreboard table tr {
+  border-bottom: 1px solid #fff;
+}
+.scoreboard table tr:last-child {
+  border-bottom: none;
+}
+.scoreboard table td {
+  border-left: 1px solid #fff;
+}
+.scoreboard table td:first-child {
+  border-left: none;
 }
 .modalMask {
-  opacity: 0.3;
+  opacity: 0.9;
   width: 100%;
   height: 100%;
   z-index: 10;

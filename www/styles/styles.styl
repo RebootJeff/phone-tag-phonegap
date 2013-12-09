@@ -254,6 +254,17 @@ transition-duration(n)
   width: 80%
   height: 80%
   z-index: 11
+  overflow: auto
+  table
+    border-collapse: collapse
+    tr
+      border-bottom: 1px solid white
+    tr:last-child
+      border-bottom: none
+    td
+      border-left: 1px solid white
+    td:first-child
+      border-left: none
 
 .modalMask
   opacity: 0.9
