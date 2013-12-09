@@ -8,6 +8,7 @@ define(['backbone', 'handlebars', '../templates/game','./MapView'], function(Bac
       new MapView({game: this.model, currentPlayer: this.model.get('currentPlayer'), socket: options.socket});
       this.model.on('startGame', this.startGame, this);
       this.model.on('renderScores', this.renderScores, this);
+      this.model.on('addToInventory', this.addToInventory, this);
     },
 
     startGame: function(){
@@ -33,6 +34,10 @@ define(['backbone', 'handlebars', '../templates/game','./MapView'], function(Bac
           that.model.endGame();
         }
       }, 1000);
+    },
+
+    addToInventory: function(data){
+      $('.menu').append("<button class='topcoat-button power-up "+data.powerUpName+"' data-powerupname='"+data.powerUpName+"' data-powerupid='"+data.powerUpID+"' ></button>");
     },
 
     renderScores: function(data){

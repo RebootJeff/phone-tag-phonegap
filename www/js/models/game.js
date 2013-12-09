@@ -2,7 +2,6 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
   var Game = Backbone.Model.extend({
     initialize: function(options){
       // Create players
-      // this.set('gameID', 1);
       // var currentPlayer = new CurrentPlayer({name: options.currentPlayer, gameID: this.get('gameID'), socket:this.socket});
       var currentPlayer = new CurrentPlayer({name: options.playerName, socket:this.socket});
       this.set('currentPlayer', currentPlayer);
@@ -65,6 +64,9 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
       this.socket.on('playerRevived', function(data){
         that.setPlayerAlive(data);
       });
+      this.socket.on('addPowerUpToInventory', function(data){
+        that.addToInventory(data);
+      })
       // this.socket.on('sendLocationsToPlayer', function(data){
       //   that.updateLocations(data);
       // });
@@ -101,6 +103,13 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
       this.get('map').addPowerUpToMap(data);
     },
 
+    usePowerUp: function(data){
+      data.gameID = this.get('gameID');
+      data.playerName = this.get('currentPlayer').get('name');
+      this.socket.emit('usePowerUp', data);
+      this.get('map').usePowerUp(data);
+    },
+
     powerUpExpired: function(data){
       this.get('map').powerUpExpired(data);
     },
@@ -109,18 +118,23 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
       var currentPlayer = this.get('currentPlayer');
       if (data.playerName === currentPlayer.get('name')){
         currentPlayer.set('alive', false);
-        // this.get('map').addPowerUpToMap(data.respawn);
+        this.get('map').addPowerUpToMap(data.respawn);
       }else{
         var deadPlayer = this.get('otherPlayers').find(function(model){
           return model.get('name') === data.playerName;
         });
         deadPlayer.set('alive', false);
       }
+      console.log('sending respawn');
       this.get('map').setPlayerDead(data.playerName);
     },
 
     setPlayerAlive: function(data){
       this.get('map').setPlayerAlive(data.playerName);
+    },
+
+    addToInventory: function(data){
+      this.trigger('addToInventory', data);
     }
     // updateLocations: function(data){
     //   var players = this.get('otherPlayers').models;

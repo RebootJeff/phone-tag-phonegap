@@ -30,8 +30,8 @@ define(['backbone', 'Hammer', 'routers/MainRouter'], function(Backbone, Hammer, 
 
       // Game events
       // hammertime.on('tap', 'button.start', this.sendStartGame.bind(this));
-      hammertime.on('tap', 'button.power-up', this.powerUp.bind(this));
-      // hammertime.on('tap', 'button.power-up', this.powerUpInventory.bind(this));
+      // hammertime.on('tap', 'button.power-up', this.powerUp.bind(this));
+      hammertime.on('tap', 'button.power-up', this.usePowerUp.bind(this));
       hammertime.on('tap', 'button.tag', this.tag.bind(this));
       hammertime.on('tap', 'button.toggle-menu', this.renderInventoryView.bind(this));
       hammertime.on('swipeleft swiperight', '#map-canvas', this.renderInventoryView.bind(this));
@@ -142,9 +142,12 @@ define(['backbone', 'Hammer', 'routers/MainRouter'], function(Backbone, Hammer, 
       }, 1000);
     },
 
-    powerUpInventory: function(e){
+    usePowerUp: function(e){
       e && e.preventDefault();
-      console.log('PowerUp Inventory is clicked:', e.currentTarget);
+      var powerUpID = $(e.currentTarget).attr('data-powerupid');
+      var powerUpName = $(e.currentTarget).attr('data-powerupname');
+      $(e.currentTarget).remove();
+      this.model.get('currentGame').usePowerUp({powerUpID:powerUpID, powerUpName:powerUpName});
     },
 
     // Map functions
@@ -164,11 +167,11 @@ define(['backbone', 'Hammer', 'routers/MainRouter'], function(Backbone, Hammer, 
       this.model.get('currentGame').trigger('zoomIn');
     },
 
-    powerUp: function(e){
-      e && e.preventDefault();
-      console.log('Pick Up clicked');
-      this.model.get('currentGame').trigger('powerUp');
-    },
+    // powerUp: function(e){
+    //   e && e.preventDefault();
+    //   console.log('Pick Up clicked');
+    //   this.model.get('currentGame').trigger('powerUp');
+    // },
 
     centerMap: function(e){
       e && e.preventDefault();
