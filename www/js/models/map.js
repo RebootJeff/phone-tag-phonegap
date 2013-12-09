@@ -459,6 +459,10 @@ define(['backbone'], function(Backbone){
       }
     },
 
+    // animateWinner: function(data){
+    //   this.playerMarkers[data.name].setAnimation(google.maps.Animation.BOUNCE);
+    // },
+
     markerRadarDisplay: function(marker){
       if(marker.id !== this.get('currentPlayer').get('name')){
         if(marker.timer){clearInterval(marker.timer);}

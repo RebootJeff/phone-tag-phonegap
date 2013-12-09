@@ -43,6 +43,11 @@ define(['backbone', 'handlebars', '../templates/game','./MapView'], function(Bac
       _.each(data, function(player){
         $('.scoreboard tbody').append('<tr><td>' + player.name + '</td><td>' + player.kills + '</td><td>' + player.deaths + '</td><td>' + player.totalTags + '</td><td>' + player.totalTags / that.model.get('timeLimit') + '</td></tr>');
       });
+
+      // // If there is a winner, animate the winner;
+      // if(data.winner){
+      //   this.model.trigger('animateWinner', data.winner);
+      // }
     },
 
     render: function(){

@@ -75,6 +75,7 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
       this.on('centerMap', this.centerMap, this);
       this.on('zoomOut', this.zoomOut, this);
       this.on('zoomIn', this.zoomIn, this);
+      // this.on('animateWinner', this.animateWinner, this);
       // this.on('powerUp', this.powerUp, this);
     },
 
@@ -122,6 +123,9 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
     setPlayerAlive: function(data){
       this.get('map').setPlayerAlive(data.playerName);
     }
+    // animateWinner: function(data){
+    //   this.get('map').animateWinner(data);
+    // }
     // updateLocations: function(data){
     //   var players = this.get('otherPlayers').models;
     //   for (var i = 0; i < players.length; i++) {
