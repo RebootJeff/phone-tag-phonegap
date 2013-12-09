@@ -340,6 +340,7 @@ define(['backbone'], function(Backbone){
 
     removePowerUpFromMap: function(marker){
       marker.setMap(null);
+      marker.powerUpCircle.setMap(null);
       delete this.powerUpMarkers[marker.id];
       this.powerUpCounter--;
       if (!this.powerUpCounter) {
