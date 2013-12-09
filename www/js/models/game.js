@@ -51,7 +51,7 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
       });
 
       this.socket.on('animateTag', function(data){
-        that.get('map').tagAnimate(data.name);
+        that.get('map').tagAnimate(data.playerName);
       });
       this.socket.on('sendPowerUp', function(data){
         that.addPowerUp(data);
@@ -83,7 +83,7 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
     },
 
     tagPlayers: function(){
-      this.socket.emit('tag', {name: this.get('currentPlayer').get('name'), gameID: this.get('roomID')});
+      this.socket.emit('tag', {playerName: this.get('currentPlayer').get('name'), gameID: this.get('roomID')});
       this.get('map').checkPlayersToTag();
       // this.get('map').tagAnimate();
     },
@@ -107,19 +107,20 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
 
     setPlayerDead: function(data){
       var currentPlayer = this.get('currentPlayer');
-      if (data.name === currentPlayer.get('name')){
-        currentPlayer.set('isAlive', false);
+      if (data.playerName === currentPlayer.get('name')){
+        currentPlayer.set('alive', false);
         // this.get('map').addPowerUpToMap(data.respawn);
+      }else{
+        var deadPlayer = this.get('otherPlayers').find(function(model){
+          return model.get('name') === data.playerName;
+        });
+        deadPlayer.set('alive', false);
       }
-      var deadPlayer = this.get('otherPlayers').find(function(model){
-        return model.get('name') === data.name;
-      });
-      deadPlayer.set('isAlive', false);
-      this.get('map').setPlayerDead(data.name);
+      this.get('map').setPlayerDead(data.playerName);
     },
 
-    setPlayerAlive: function(player){
-      this.get('map').setPlayerAlive(player.name);
+    setPlayerAlive: function(data){
+      this.get('map').setPlayerAlive(data.playerName);
     }
     // updateLocations: function(data){
     //   var players = this.get('otherPlayers').models;
