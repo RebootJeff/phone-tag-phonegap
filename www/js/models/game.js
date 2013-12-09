@@ -55,6 +55,9 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
       this.socket.on('sendPowerUp', function(data){
         that.addPowerUp(data);
       });
+      this.socket.on('powerUpUsed', function(data){
+        that.powerUpUsed(data);
+      });
       this.socket.on('powerUpExpired', function(data){
         that.powerUpExpired(data);
       });
@@ -107,7 +110,10 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
       data.gameID = this.get('gameID');
       data.playerName = this.get('currentPlayer').get('name');
       this.socket.emit('usePowerUp', data);
-      this.get('map').usePowerUp(data);
+    },
+
+    powerUpUsed: function(data){
+      this.get('map').powerUpUsed(data);
     },
 
     powerUpExpired: function(data){

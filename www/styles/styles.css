@@ -98,6 +98,10 @@ table {
 .join {
   font-size: 1.5em;
 }
+.gm-style-cc,
+.gmnoprint {
+  display: none;
+}
 .timer {
   position: fixed;
   text-align: center;
@@ -105,17 +109,13 @@ table {
   font-size: 1.5em;
   color: #000;
 }
-.gm-style-cc,
-.gmnoprint {
-  display: none;
-}
 .menu {
   height: 100%;
   width: 30%;
   position: absolute;
   left: 0;
   z-index: 11;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0,0,0,0.5);
   transition-property: all;
   -webkit-transition-duration: 0.1s;
   -moz-transition-duration: 0.1s;
@@ -144,10 +144,10 @@ table {
 .center-map {
   background-image: url("../img/menu/map-center.png");
 }
-.power-up.invisibility {
+.power-up.invisible {
   background-image: url("../img/menu/power-up-invisibility.png");
 }
-.power-up.invincibility {
+.power-up.invincible {
   background-image: url("../img/menu/power-up-invincibility.png");
 }
 .toggle-menu {

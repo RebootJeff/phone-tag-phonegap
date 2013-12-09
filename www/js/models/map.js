@@ -60,33 +60,55 @@ define(['backbone'], function(Backbone){
     powerUpMarkers: {},
     powerUpCounter: 0,
 
+
+    defaultIconSize: new google.maps.Size(25,25),
+    defaultIconOrigin: new google.maps.Point(0,0),
+    defaultIconAnchor: new google.maps.Point(12,12),
+
+    iconURLs: {
+      alive: 'img/map/player-alive.png',
+      enemy: 'img/map/player-enemy.png',
+      dead: 'img/map/player-dead.png',
+      invincible: 'img/map/power-up-invincibility.png',
+      invisible: 'img/map/power-up-invincibility.png'
+    },
+
     // Marker icons
     playerIcon: {
-      size: new google.maps.Size(25, 25),
-      origin: new google.maps.Point(0,0),
-      anchor: new google.maps.Point(12, 12),
+      size: this.defaultIconSize,
+      origin: this.defaultIconOrigin,
+      anchor: this.defaultIconAnchor,
       url: 'img/map/player-alive.png'
     },
 
     enemyIcon: {
-      size: new google.maps.Size(25, 25),
-      origin: new google.maps.Point(0,0),
-      anchor: new google.maps.Point(12, 12),
+      size: this.defaultIconSize,
+      origin: this.defaultIconOrigin,
+      anchor: this.defaultIconAnchor,
       url: 'img/map/player-enemy.png'
     },
 
     deadIcon: {
-      size: new google.maps.Size(25, 25),
-      origin: new google.maps.Point(0,0),
-      anchor: new google.maps.Point(12, 12),
+      size: this.defaultIconSize,
+      origin: this.defaultIconOrigin,
+      anchor: this.defaultIconAnchor,
       url: 'img/map/player-dead.png'
     },
 
-    powerUpIcon: {
-      size: new google.maps.Size(25, 25),
-      origin: new google.maps.Point(0,0),
-      anchor: new google.maps.Point(12, 12)
+    invincibleIcon: {
+      size: this.defaultIconSize,
+      origin: this.defaultIconOrigin,
+      anchor: this.defaultIconAnchor,
+      url: 'img/map/power-up-invincibility.png'
     },
+
+    invisibleIcon: {
+      size: this.defaultIconSize,
+      origin: this.defaultIconOrigin,
+      anchor: this.defaultIconAnchor,
+      url: 'img/map/power-up-invisibility.png'
+    },
+
 
     pacmanSmallIcon: {
       size: new google.maps.Size(90, 90),
@@ -233,7 +255,7 @@ define(['backbone'], function(Backbone){
       var title = powerUp.name;
       var that = this;
 
-      this.powerUpIcon.url = ('img/map/power-up-invincibility.png');
+      var iconName = powerUp.name+'Icon';
 
       var myLatlng = new google.maps.LatLng(powerUp.location.lat, powerUp.location.lng);
       var marker = new google.maps.Marker({
@@ -241,7 +263,7 @@ define(['backbone'], function(Backbone){
         position: myLatlng,
         map: this.map,
         title: title,
-        icon: this.powerUpIcon,
+        icon: that[iconName],
         radius: powerUp.radius
       });
       if (title === 'respawn'){
@@ -301,7 +323,6 @@ define(['backbone'], function(Backbone){
           } else {
             this.get('socket').emit('addItemToPlayer', data);
           }
-          this.removePowerUpFromMap(powerUpID);
         }
       }
     },
@@ -367,16 +388,31 @@ define(['backbone'], function(Backbone){
       }, 10000);
     },
 
-    usePowerUp: function(data){
-      var newIcon = 'img/map/pacman-large-left.gif';
-      this.currentPlayerMarker.setIcon(newIcon);
+    // usePowerUp: function(data){
+    //   var newIcon = this;
+    //   this.currentPlayerMarker.setIcon(newIcon);
+    // },
+
+    powerUpUsed: function(data){
+      var playerMarker = this.playerMarkers[data.playerName];
+      var iconName = data.powerUpName + 'Icon';
+      playerMarker.setIcon(this[iconName]);
+    },
+
+    powerUpExpired: function(data){
+      var playerMarker = this.playerMarkers[data.playerName];
+      if (data.playerName === this.get('currentPlayer').get('name')){
+        playerMarker.setIcon(this.playerIcon);
+      } else {
+        playerMarker.setIcon(this.enemyIcon);
+      }
     },
 
     removePowerUpFromMap: function(data){
       var marker = this.powerUpMarkers[data.powerUpID];
       marker.setMap(null);
       marker.powerUpCircle.setMap(null);
-      // delete this.powerUpMarkers[marker.id];
+      delete this.powerUpMarkers[marker.id];
       this.powerUpCounter--;
       if (!this.powerUpCounter) {
         clearInterval(this.trackPowerUpTimer);
