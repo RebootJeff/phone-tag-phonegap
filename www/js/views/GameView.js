@@ -8,6 +8,7 @@ define(['backbone', 'handlebars', '../templates/game','./MapView'], function(Bac
       new MapView({game: this.model, currentPlayer: this.model.get('currentPlayer'), socket: options.socket});
       this.model.on('startGame', this.startGame, this);
       this.model.on('renderScores', this.renderScores, this);
+      this.model.on('addToInventory', this.addToInventory, this);
     },
 
     startGame: function(){
@@ -35,13 +36,17 @@ define(['backbone', 'handlebars', '../templates/game','./MapView'], function(Bac
       }, 1000);
     },
 
+    addToInventory: function(data){
+      $('.menu').append("<button class='topcoat-button power-up "+data.powerUpName+"' data-powerupname='"+data.powerUpName+"' data-powerupid='"+data.powerUpID+"' ></button>");
+    },
+
     renderScores: function(data){
       var that = this;
       $('#container').append('<section class="scoreboard"></section>');
       $('#container').append('<section class="modalMask"></section>');
-      $('.scoreboard').append('<table><tr><th>Name</th><th>Kills</th><th>Deaths</th><th>Attempted Tags</th><th>Tags/min</th></tr></table>');
-      _.each(data, function(player){
-        $('.scoreboard tbody').append('<tr><td>' + player.name + '</td><td>' + player.kills + '</td><td>' + player.deaths + '</td><td>' + player.totalTags + '</td><td>' + player.totalTags / that.model.get('timeLimit') + '</td></tr>');
+      $('.scoreboard').append('<table><tr><th>Name</th><th>Score</th><th>Kills</th><th>Deaths</th><th>Attempted Tags</th><th>Tags/min</th></tr></table>');
+      _.each(data.players, function(player){
+        $('.scoreboard tbody').append('<tr><td>' + player.name + '</td><td>' + player.score + '</td><td>' + player.kills + '</td><td>' + player.deaths + '</td><td>' + player.totalTags + '</td></tr>');
       });
 
       // // If there is a winner, animate the winner;

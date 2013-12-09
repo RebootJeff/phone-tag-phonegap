@@ -20,7 +20,6 @@ define(function(){
       <p>Re-center Map</p> \
       <button class='topcoat-button center-map'></button> \
       <p>Inventory</p> \
-      <button class='topcoat-button power-up invincibility'></button> \
       <button class='topcoat-button toggle-menu'></button> \
     </aside> \
     <aside class='bottom-controls'> \
