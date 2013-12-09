@@ -60,33 +60,55 @@ define(['backbone'], function(Backbone){
     powerUpMarkers: {},
     powerUpCounter: 0,
 
+
+    defaultIconSize: new google.maps.Size(25,25),
+    defaultIconOrigin: new google.maps.Point(0,0),
+    defaultIconAnchor: new google.maps.Point(12,12),
+
+    iconURLs: {
+      alive: 'img/map/player-alive.png',
+      enemy: 'img/map/player-enemy.png',
+      dead: 'img/map/player-dead.png',
+      invincible: 'img/map/power-up-invincibility.png',
+      invisible: 'img/map/power-up-invincibility.png'
+    },
+
     // Marker icons
     playerIcon: {
-      size: new google.maps.Size(25, 25),
-      origin: new google.maps.Point(0,0),
-      anchor: new google.maps.Point(12, 12),
+      size: this.defaultIconSize,
+      origin: this.defaultIconOrigin,
+      anchor: this.defaultIconAnchor,
       url: 'img/map/player-alive.png'
     },
 
     enemyIcon: {
-      size: new google.maps.Size(25, 25),
-      origin: new google.maps.Point(0,0),
-      anchor: new google.maps.Point(12, 12),
+      size: this.defaultIconSize,
+      origin: this.defaultIconOrigin,
+      anchor: this.defaultIconAnchor,
       url: 'img/map/player-enemy.png'
     },
 
     deadIcon: {
-      size: new google.maps.Size(25, 25),
-      origin: new google.maps.Point(0,0),
-      anchor: new google.maps.Point(12, 12),
+      size: this.defaultIconSize,
+      origin: this.defaultIconOrigin,
+      anchor: this.defaultIconAnchor,
       url: 'img/map/player-dead.png'
     },
 
-    powerUpIcon: {
-      size: new google.maps.Size(25, 25),
-      origin: new google.maps.Point(0,0),
-      anchor: new google.maps.Point(12, 12)
+    invincibleIcon: {
+      size: this.defaultIconSize,
+      origin: this.defaultIconOrigin,
+      anchor: this.defaultIconAnchor,
+      url: 'img/map/power-up-invincibility.png'
     },
+
+    invisibleIcon: {
+      size: this.defaultIconSize,
+      origin: this.defaultIconOrigin,
+      anchor: this.defaultIconAnchor,
+      url: 'img/map/power-up-invisibility.png'
+    },
+
 
     pacmanSmallIcon: {
       size: new google.maps.Size(90, 90),
@@ -235,7 +257,7 @@ define(['backbone'], function(Backbone){
       var title = powerUp.name;
       var that = this;
 
-      this.powerUpIcon.url = ('img/map/power-up-invincibility.png');
+      var iconName = powerUp.name+'Icon';
 
       var myLatlng = new google.maps.LatLng(powerUp.location.lat, powerUp.location.lng);
       var marker = new google.maps.Marker({
@@ -243,7 +265,7 @@ define(['backbone'], function(Backbone){
         position: myLatlng,
         map: this.map,
         title: title,
-        icon: this.powerUpIcon,
+        icon: that[iconName],
         radius: powerUp.radius
       });
       if (title === 'respawn'){
@@ -286,18 +308,21 @@ define(['backbone'], function(Backbone){
       var player = this.get('currentPlayer');
 
       for (var powerUpID in this.powerUpMarkers) {
-
         marker = this.powerUpMarkers[powerUpID];
 
         if(this.checkDistance(marker, this.currentPlayerMarker, marker.radius)){
-          var data = { playerName: player.get('name'), gameID: player.get('gameID'), powerUpName: marker.title, powerUpID: marker.id };
+          var data = {
+            playerName: player.get('name'),
+            gameID: player.get('gameID'),
+            powerUpName: marker.title,
+            powerUpID: marker.id
+          };
           if (marker.title === 'respawn') {
             this.setPlayerAlive(data.playerName);
             this.get('socket').emit('playerRespawn', data);
           } else {
             this.get('socket').emit('addItemToPlayer', data);
           }
-          this.removePowerUpFromMap(marker);
         }
       }
     },
@@ -346,10 +371,12 @@ define(['backbone'], function(Backbone){
             response.playerName = currentPlayer.get('name');
             response.gameID = currentPlayer.get('gameID');
             that.get('socket').emit('setPlayerDead', response);
+            currentPlayer.set('alive', false);
             // Respawn for the current player after 10 seconds
-            setTimeout(function(){
-              that.get('socket').emit('setPlayerAlive', response);
-            }, 10000);
+            // setTimeout(function(){
+            //   that.get('socket').emit('setPlayerAlive', response);
+            //   currentPlayer.set('alive', true);
+            // }, 10000);
         }
 
       }, 50);
@@ -362,7 +389,28 @@ define(['backbone'], function(Backbone){
       }, 10000);
     },
 
-    removePowerUpFromMap: function(marker){
+    // usePowerUp: function(data){
+    //   var newIcon = this;
+    //   this.currentPlayerMarker.setIcon(newIcon);
+    // },
+
+    powerUpUsed: function(data){
+      var playerMarker = this.playerMarkers[data.playerName];
+      var iconName = data.powerUpName + 'Icon';
+      playerMarker.setIcon(this[iconName]);
+    },
+
+    powerUpExpired: function(data){
+      var playerMarker = this.playerMarkers[data.playerName];
+      if (data.playerName === this.get('currentPlayer').get('name')){
+        playerMarker.setIcon(this.playerIcon);
+      } else {
+        playerMarker.setIcon(this.enemyIcon);
+      }
+    },
+
+    removePowerUpFromMap: function(data){
+      var marker = this.powerUpMarkers[data.powerUpID];
       marker.setMap(null);
       marker.powerUpCircle.setMap(null);
       delete this.powerUpMarkers[marker.id];
@@ -450,8 +498,9 @@ define(['backbone'], function(Backbone){
 
     setPlayerDead: function(name){
       if(name === this.get('currentPlayer').get('name')){
-        this.tagCountdown();
         $('button.tag').prop('disabled', true);
+        this.get('currentPlayer').set('alive', false);
+        // this.tagCountdown();
       }
       this.playerMarkers[name].setIcon(this.deadIcon);
     },
