@@ -381,7 +381,6 @@ define(['backbone'], function(Backbone){
       // Loop through all players to see if they are tagable
       for(var playerName in this.playerMarkers){
         marker = this.playerMarkers[playerName];
-        debugger;
         if(marker.distanceFromCurrentPlayer < 10 && marker.id !== this.get('currentPlayer').get('name')){
           player = {playerName: marker.id, gameID: this.get('currentPlayer').get('gameID')};
           tagged.push(player);
@@ -422,7 +421,7 @@ define(['backbone'], function(Backbone){
       var timer = setInterval(function(){
         radius+=0.25;
         that.circle.setRadius(radius);
-        if(radius >= 22){
+        if(radius >= 10){
           clearInterval(timer);
           that.circle.setMap(null);
         }
