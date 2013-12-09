@@ -33,14 +33,14 @@ define(['backbone', 'Hammer', 'routers/MainRouter'], function(Backbone, Hammer, 
       hammertime.on('tap', 'button.power-up', this.powerUp.bind(this));
       // hammertime.on('tap', 'button.power-up', this.powerUpInventory.bind(this));
       hammertime.on('tap', 'button.tag', this.tag.bind(this));
-      hammertime.on('tap', 'button.toggle-menu', this.renderInventoryView.bind(this));
-      hammertime.on('swipeleft swiperight', '#map-canvas', this.renderInventoryView.bind(this));
       hammertime.on('tap', 'button.quit', this.quitGame.bind(this));
 
       // Map control events
+      hammertime.on('tap', 'button.toggle-menu', this.toggleMenu.bind(this));
+      hammertime.on('swipeleft', '#map-canvas', this.closeMenu.bind(this));
+      hammertime.on('swiperight', '#map-canvas', this.openMenu.bind(this));
       hammertime.on('pinchin', '#map-canvas', this.zoomOut.bind(this));
       hammertime.on('pinchout', '#map-canvas', this.zoomIn.bind(this));
-      hammertime.on('tap', 'button.toggleModal', this.toggleModal.bind(this));
       hammertime.on('tap', 'button.center-map', this.centerMap.bind(this));
 
     // var container = $('#container');
@@ -105,11 +105,6 @@ define(['backbone', 'Hammer', 'routers/MainRouter'], function(Backbone, Hammer, 
       this.router.navigate('/game', {trigger:true});
     },
 
-    renderInventoryView: function(e){
-      e && e.preventDefault();
-      $('.menu').toggleClass('closed');
-    },
-
     // checkAuth: function(){
     //   if(!this.model.get('user')){
     //     this.model.trigger('createPlayer');
@@ -148,10 +143,22 @@ define(['backbone', 'Hammer', 'routers/MainRouter'], function(Backbone, Hammer, 
     },
 
     // Map functions
-    toggleModal: function(e){
+    openMenu: function(e){
       e && e.preventDefault();
-      console.log('modalToggled');
-      $('.modal').toggleClass('closed');
+      console.log('menuOpened');
+      $('.menu').removeClass('closed');
+    },
+
+    closeMenu: function(e){
+      e && e.preventDefault();
+      console.log('menuClosed');
+      $('.menu').addClass('closed');
+    },
+
+    toggleMenu: function(e){
+      e && e.preventDefault();
+      console.log('menuToggled');
+      $('.menu').toggleClass('closed');
     },
 
     zoomOut: function(e){
