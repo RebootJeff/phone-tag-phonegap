@@ -8,6 +8,8 @@ define(['backbone'], function(Backbone){
       this.setCurrentMarker();
     },
 
+    trackPowerUpTimer: null,
+
     // Map options
     mapOptions: {
       center: new google.maps.LatLng(37.7837749, -122.4167),
@@ -224,7 +226,8 @@ define(['backbone'], function(Backbone){
         position: myLatlng,
         map: this.map,
         title: title,
-        icon: this.powerUpIcon
+        icon: this.powerUpIcon,
+        radius: powerUp.radius
       });
       if (title === 'respawn'){
         powerUpRadius = {
@@ -246,7 +249,7 @@ define(['backbone'], function(Backbone){
           fillOpacity: 0.35,
           map: this.map,
           center: myLatlng,
-          radius: 13
+          radius: 15
         };
       }
 
@@ -254,8 +257,8 @@ define(['backbone'], function(Backbone){
       marker.powerUpName = title;
       this.powerUpMarkers[marker.id] = marker;
       if (!this.powerUpCounter) {
-        var trackPowerUpTimer = setInterval(function(){
-          // that.trackPowerUps();
+        this.trackPowerUpTimer = setInterval(function(){
+          that.trackPowerUps();
         }, 1000);
       }
       this.powerUpCounter++;
@@ -264,18 +267,21 @@ define(['backbone'], function(Backbone){
     trackPowerUps: function(){
       var marker;
       var player = this.get('currentPlayer');
+
       for (var powerUpID in this.powerUpMarkers) {
 
         marker = this.powerUpMarkers[powerUpID];
         this.setDistanceFromUser(marker);
+
         if( marker && marker.distanceFromCurrentPlayer <= marker.radius ){
           var data = { playerName: player.get('name'), gameID: player.get('gameID'), powerUpName: marker.title, powerUpID: marker.id };
           if (marker.title === 'respawn') {
-            this.setPlayerAlive();
+            this.setPlayerAlive(data.playerName);
             this.get('socket').emit('playerRespawn', data);
           } else {
             this.get('socket').emit('addItemToPlayer', data);
           }
+          this.removePowerUpFromMap(marker);
         }
       }
     },
@@ -313,12 +319,12 @@ define(['backbone'], function(Backbone){
 
         // Determine if Pacman killed the current user
         if(distance < 8 && that.alive){
-          that.get('socket').emit('setPlayerDead', {name: that.get('currentPlayer').get('name'), roomID: that.get('currentPlayer').get('roomID')});
+          that.get('socket').emit('setPlayerDead', {name: that.get('currentPlayer').get('name'), gameID: that.get('currentPlayer').get('gameID')});
           that.alive = false;
 
           // Respawn for the current player after 10 seconds
           setTimeout(function(){
-            that.get('socket').emit('setPlayerAlive', {name: that.get('currentPlayer').get('name'), roomID: that.get('currentPlayer').get('roomID')});
+            that.get('socket').emit('setPlayerAlive', {name: that.get('currentPlayer').get('name'), gameID: that.get('currentPlayer').get('gameID')});
             that.alive = true;
           }, 10000);
         }
@@ -332,13 +338,12 @@ define(['backbone'], function(Backbone){
       }, 10000);
     },
 
-    removePowerUpFromMap: function(data){
-      var marker = this.powerUpMarkers[data.powerUpID];
+    removePowerUpFromMap: function(marker){
       marker.setMap(null);
-      delete this.powerUpMarkers[data.powerUpID];
+      delete this.powerUpMarkers[marker.id];
       this.powerUpCounter--;
       if (!this.powerUpCounter) {
-        clearInterval(trackPowerUpTimer);
+        clearInterval(this.trackPowerUpTimer);
       }
     },
 
@@ -419,11 +424,12 @@ define(['backbone'], function(Backbone){
       this.playerMarkers[name].setIcon(this.deadIcon);
     },
 
-    setPlayerAlive: function(player){
-      if(player.name === this.get('currentPlayer').get('name')){
+    setPlayerAlive: function(playerName){
+      if(playerName === this.get('currentPlayer').get('name')){
         return this.currentPlayerMarker.setIcon(this.playerIcon);
+      } else {
+        this.playerMarkers[playerName].setIcon(this.enemyIcon);
       }
-      this.playerMarkers[player].setIcon(this.enemyIcon);
     },
 
     markerRadarDisplay: function(marker){
