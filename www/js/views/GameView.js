@@ -39,9 +39,9 @@ define(['backbone', 'handlebars', '../templates/game','./MapView'], function(Bac
       var that = this;
       $('#container').append('<section class="scoreboard"></section>');
       $('#container').append('<section class="modalMask"></section>');
-      $('.scoreboard').append('<table><tr><th>Name</th><th>Kills</th><th>Deaths</th><th>Attempted Tags</th><th>Tags/min</th></tr></table>');
-      _.each(data, function(player){
-        $('.scoreboard tbody').append('<tr><td>' + player.name + '</td><td>' + player.kills + '</td><td>' + player.deaths + '</td><td>' + player.totalTags + '</td><td>' + player.totalTags / that.model.get('timeLimit') + '</td></tr>');
+      $('.scoreboard').append('<table><tr><th>Name</th><th>Score</th><th>Kills</th><th>Deaths</th><th>Attempted Tags</th><th>Tags/min</th></tr></table>');
+      _.each(data.players, function(player){
+        $('.scoreboard tbody').append('<tr><td>' + player.name + '</td><td>' + player.score + '</td><td>' + player.kills + '</td><td>' + player.deaths + '</td><td>' + player.totalTags + '</td></tr>');
       });
     },
 

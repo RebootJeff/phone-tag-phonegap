@@ -34,6 +34,7 @@ define(['backbone', 'Hammer', 'routers/MainRouter'], function(Backbone, Hammer, 
       // hammertime.on('tap', 'button.power-up', this.powerUpInventory.bind(this));
       hammertime.on('tap', 'button.tag', this.tag.bind(this));
       hammertime.on('tap', 'button.quit', this.quitGame.bind(this));
+      hammertime.on('tap', 'section.scoreboard', this.closeScoreboard.bind(this));
 
       // Map control events
       hammertime.on('tap', 'button.toggle-menu', this.toggleMenu.bind(this));
@@ -103,6 +104,12 @@ define(['backbone', 'Hammer', 'routers/MainRouter'], function(Backbone, Hammer, 
     renderGameView: function(e){
       e && e.preventDefault();
       this.router.navigate('/game', {trigger:true});
+    },
+
+    closeScoreboard: function(e){
+      e && e.preventDefault();
+      $('.scoreboard').remove();
+      $('.modalMask').remove();
     },
 
     // checkAuth: function(){
