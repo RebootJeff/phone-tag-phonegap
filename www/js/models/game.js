@@ -83,7 +83,7 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
     },
 
     tagPlayers: function(){
-      this.socket.emit('tag', {playerName: this.get('currentPlayer').get('name'), gameID: this.get('roomID')});
+      this.socket.emit('tag', {playerName: this.get('currentPlayer').get('name'), gameID: this.get('gameID')});
       this.get('map').checkPlayersToTag();
       // this.get('map').tagAnimate();
     },
@@ -120,6 +120,7 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
     },
 
     setPlayerAlive: function(data){
+      this.get('currentPlayer').set('alive', true);
       this.get('map').setPlayerAlive(data.playerName);
     }
     // updateLocations: function(data){

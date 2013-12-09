@@ -23,13 +23,13 @@ define(function(){
     </section> \
     <aside class='timer'>10:00</aside> \
     <aside class='menu closed'> \
+      <button class='topcoat-button toggle-menu'></button> \
       <p>Quit</p> \
       <button class='topcoat-button quit'></button> \
       <p>Re-center Map</p> \
       <button class='topcoat-button center-map'></button> \
       <p>Inventory</p> \
       <button class='topcoat-button power-up invincibility'></button> \
-      <button class='topcoat-button toggle-menu'></button> \
     </aside> \
     <aside class='bottom-controls'> \
       <button class='topcoat-button tag hidden'>TAG</button> \
