@@ -312,7 +312,8 @@ define(['backbone'], function(Backbone){
         distance = google.maps.geometry.spherical.computeDistanceBetween(that.pacmanMarker.position, that.currentPlayerMarker.position);
 
         // Determine if Pacman killed the current user
-        if(distance < 8 && that.alive){
+        var currentPlayer = that.get('currentPlayer');
+        if(distance < 8 && currentPlayer.get('isAlive') && that.get()){
           that.get('socket').emit('setPlayerDead', {name: that.get('currentPlayer').get('name'), roomID: that.get('currentPlayer').get('roomID')});
           that.alive = false;
 
@@ -380,7 +381,7 @@ define(['backbone'], function(Backbone){
       if(name && name !== this.get('currentPlayer').get('name')){
         marker = this.playerMarkers[name];
         center = marker.position;
-        strokeColor = '#3777D8';
+        strokeColor = '#880000';
       }
 
       var circleOptions = {
@@ -421,15 +422,18 @@ define(['backbone'], function(Backbone){
     setPlayerDead: function(name){
       if(name === this.get('currentPlayer').get('name')){
         this.tagCountdown();
+        $('button.tag').prop('disabled',true);
       }
       this.playerMarkers[name].setIcon(this.deadIcon);
     },
 
     setPlayerAlive: function(player){
       if(player.name === this.get('currentPlayer').get('name')){
-        return this.currentPlayerMarker.setIcon(this.playerIcon);
+        $('button.tag').prop('disabled',false);
+        this.currentPlayerMarker.setIcon(this.playerIcon);
+      } else {
+        this.playerMarkers[player].setIcon(this.enemyIcon);
       }
-      this.playerMarkers[player].setIcon(this.enemyIcon);
     },
 
     markerRadarDisplay: function(marker){
