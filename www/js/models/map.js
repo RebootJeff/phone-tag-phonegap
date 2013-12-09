@@ -346,11 +346,9 @@ define(['backbone'], function(Backbone){
             response.playerName = currentPlayer.get('name');
             response.gameID = currentPlayer.get('gameID');
             that.get('socket').emit('setPlayerDead', response);
-            currentPlayer.set('alive', false);
             // Respawn for the current player after 10 seconds
             setTimeout(function(){
               that.get('socket').emit('setPlayerAlive', response);
-              currentPlayer.set('alive', true);
             }, 10000);
         }
 
