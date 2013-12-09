@@ -120,6 +120,7 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
     },
 
     setPlayerAlive: function(data){
+      this.get('currentPlayer').set('alive', true);
       this.get('map').setPlayerAlive(data.playerName);
     }
     // updateLocations: function(data){
