@@ -235,10 +235,13 @@ table {
 .scoreboard table tr:last-child {
   border-bottom: none;
 }
-.scoreboard table td {
+.scoreboard table td,
+.scoreboard table th {
   border-left: 1px solid #fff;
+  padding: 0.5em;
 }
-.scoreboard table td:first-child {
+.scoreboard table td:first-child,
+.scoreboard table th:first-child {
   border-left: none;
 }
 .modalMask {
