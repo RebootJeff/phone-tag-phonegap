@@ -366,7 +366,7 @@ define(['backbone'], function(Backbone){
         // Determine if Pacman killed the current user
         if(currentPlayer.get('alive') &&
           !currentPlayer.get('invincible') &&
-          this.checkDistance(that.pacmanMarker, that.currentPlayerMarker, 22)){
+          that.checkDistance(that.pacmanMarker, that.currentPlayerMarker, 22)){
             var response = {};
             response.playerName = currentPlayer.get('name');
             response.gameID = currentPlayer.get('gameID');
