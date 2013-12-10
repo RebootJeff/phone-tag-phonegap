@@ -75,44 +75,44 @@ define(['backbone'], function(Backbone){
 
     // Marker icons
     playerIcon: {
-      size: this.defaultIconSize,
-      origin: this.defaultIconOrigin,
-      anchor: this.defaultIconAnchor,
+      size: new google.maps.Size(25,25),
+      origin: new google.maps.Point(0,0),
+      anchor: new google.maps.Point(12,12),
       url: 'img/map/player-alive.png'
     },
 
     enemyIcon: {
-      size: this.defaultIconSize,
-      origin: this.defaultIconOrigin,
-      anchor: this.defaultIconAnchor,
+      size: new google.maps.Size(25,25),
+      origin: new google.maps.Point(0,0),
+      anchor: new google.maps.Point(12,12),
       url: 'img/map/player-enemy.png'
     },
 
     deadIcon: {
-      size: this.defaultIconSize,
-      origin: this.defaultIconOrigin,
-      anchor: this.defaultIconAnchor,
+      size: new google.maps.Size(25,25),
+      origin: new google.maps.Point(0,0),
+      anchor: new google.maps.Point(12,12),
       url: 'img/map/player-dead.png'
     },
 
     invincibleIcon: {
-      size: this.defaultIconSize,
-      origin: this.defaultIconOrigin,
-      anchor: this.defaultIconAnchor,
+      size: new google.maps.Size(25,25),
+      origin: new google.maps.Point(0,0),
+      anchor: new google.maps.Point(12,12),
       url: 'img/map/power-up-invincibility.png'
     },
 
     invisibleIcon: {
-      size: this.defaultIconSize,
-      origin: this.defaultIconOrigin,
-      anchor: this.defaultIconAnchor,
+      size: new google.maps.Size(25,25),
+      origin: new google.maps.Point(0,0),
+      anchor: new google.maps.Point(12,12),
       url: 'img/map/power-up-invisibility.png'
     },
 
     respawnIcon: {
-      size: this.defaultIconSize,
-      origin: this.defaultIconOrigin,
-      anchor: this.defaultIconAnchor,
+      size: new google.maps.Size(25,25),
+      origin: new google.maps.Point(0,0),
+      anchor: new google.maps.Point(12,12),
       url: 'img/map/power-up-respawn.png'
     },
 
