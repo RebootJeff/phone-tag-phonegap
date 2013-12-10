@@ -70,7 +70,7 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
       });
       this.socket.on('addPowerUpToInventory', function(data){
         that.addToInventory(data);
-      })
+      });
     },
 
     mapSetup: function(){
