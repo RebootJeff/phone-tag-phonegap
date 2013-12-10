@@ -8,7 +8,7 @@ define(function(){
       <!-- <a class='login' href='/auth/facebook'>Login with Facebook</a> --> \
       <form> \
         <input type='text' class='topcoat-text-input--large' placeholder='Username?'></input> \
-        <submit>Sign up</submit> \
+        <button class='topcoat-button--cta'>Sign up</button> \
       </form> \
     </section> \
   </section>";
