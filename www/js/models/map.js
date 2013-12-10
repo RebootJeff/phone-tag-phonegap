@@ -109,6 +109,13 @@ define(['backbone'], function(Backbone){
       url: 'img/map/power-up-invisibility.png'
     },
 
+    respawnIcon: {
+      size: this.defaultIconSize,
+      origin: this.defaultIconOrigin,
+      anchor: this.defaultIconAnchor,
+      url: 'img/map/power-up-respawn.png'
+    },
+
 
     pacmanSmallIcon: {
       size: new google.maps.Size(90, 90),
