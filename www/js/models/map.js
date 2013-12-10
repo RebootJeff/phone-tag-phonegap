@@ -232,8 +232,8 @@ define(['backbone'], function(Backbone){
     //   }
     // },
 
-    checkDistance: function(marker1, marker2, range){
-      return google.maps.geometry.spherical.computeDistanceBetween(marker1.position, marker2.position) < range;
+    calcDistance: function(marker1, marker2){
+      return google.maps.geometry.spherical.computeDistanceBetween(marker1.position, marker2.position);
     },
 
     removeMarker: function(data){
@@ -310,7 +310,7 @@ define(['backbone'], function(Backbone){
       for (var powerUpID in this.powerUpMarkers) {
         marker = this.powerUpMarkers[powerUpID];
 
-        if(this.checkDistance(marker, this.currentPlayerMarker, marker.radius)){
+        if(this.calcDistance(marker, this.currentPlayerMarker) < marker.radius){
           var data = {
             playerName: player.get('name'),
             gameID: player.get('gameID'),
@@ -366,7 +366,7 @@ define(['backbone'], function(Backbone){
         // Determine if Pacman killed the current user
         if(currentPlayer.get('alive') &&
           !currentPlayer.get('invincible') &&
-          that.checkDistance(that.pacmanMarker, that.currentPlayerMarker, 22)){
+          that.calcDistance(that.pacmanMarker, that.currentPlayerMarker) < 22){
             var response = {};
             response.playerName = currentPlayer.get('name');
             response.gameID = currentPlayer.get('gameID');
@@ -431,7 +431,7 @@ define(['backbone'], function(Backbone){
       for(var playerName in this.playerMarkers){
         playerMarker = this.playerMarkers[playerName];
         if(playerName !== currentPlayer.get('name') &&
-          this.checkDistance(playerMarker, this.currentPlayerMarker, 10)){
+          this.calcDistance(playerMarker, this.currentPlayerMarker) < 10){
             player = {playerName: playerName, gameID: currentPlayer.get('gameID')};
             tagged.push(player);
         }
@@ -515,7 +515,7 @@ define(['backbone'], function(Backbone){
     markerRadarDisplay: function(marker){
       if(marker.id !== this.get('currentPlayer').get('name')){
         if(marker.timer){clearInterval(marker.timer);}
-        timeShown = marker.distanceFromCurrentPlayer / 150 * 5000;
+        timeShown = calcDistance(marker, this.currentPlayerMarker) / 150 * 5000;
         if(timeShown < 800){
           timeShown = 800;
         }else if(timeShown >= 5000){
