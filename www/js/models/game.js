@@ -57,6 +57,7 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
       });
       this.socket.on('powerUpUsed', function(data){
         that.powerUpUsed(data);
+        that.updateStatus(data);
       });
       this.socket.on('powerUpExpired', function(data){
         that.powerUpExpired(data);
@@ -69,10 +70,7 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
       });
       this.socket.on('addPowerUpToInventory', function(data){
         that.addToInventory(data);
-      })
-      // this.socket.on('sendLocationsToPlayer', function(data){
-      //   that.updateLocations(data);
-      // });
+      });
     },
 
     mapSetup: function(){
@@ -142,13 +140,14 @@ define(['backbone', './currentPlayer','../collections/otherPlayers'], function(B
 
     addToInventory: function(data){
       this.trigger('addToInventory', data);
+    },
+
+    updateStatus: function(data){
+      var player = this.get('otherPlayers').find(function(model){
+        return model.get('name') === data.playerName;
+      });
+      player.set(data.powerUpName, data.powerUpValue);
     }
-    // updateLocations: function(data){
-    //   var players = this.get('otherPlayers').models;
-    //   for (var i = 0; i < players.length; i++) {
-    //     players[i].set('location', data[players[i].get('name')]);
-    //   }
-    // }
 
   });
   return Game;

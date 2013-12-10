@@ -318,6 +318,7 @@ define(['backbone'], function(Backbone){
             powerUpID: marker.id
           };
           if (marker.title === 'respawn') {
+            this.removePowerUpFromMap(data);
             this.get('socket').emit('playerRespawn', data);
           } else {
             this.get('socket').emit('addItemToPlayer', data);
@@ -430,8 +431,6 @@ define(['backbone'], function(Backbone){
       for(var playerName in this.playerMarkers){
         playerMarker = this.playerMarkers[playerName];
         if(playerName !== currentPlayer.get('name') &&
-          // check if player is invincible &&
-          // check if player is dead already &&
           this.checkDistance(playerMarker, this.currentPlayerMarker, 10)){
             player = {playerName: playerName, gameID: currentPlayer.get('gameID')};
             tagged.push(player);
