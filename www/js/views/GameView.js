@@ -15,7 +15,6 @@ define(['backbone', 'handlebars', '../templates/game','./MapView'], function(Bac
       var secToStart, timeLeft, minLeft, secLeft;
       var startTime = this.model.endTime - (this.model.get('timeLimit') * 60 * 1000);
       var that = this;
-      $('#container').append('<div class="timer"></div>');
       var gameTimer = setInterval(function(){
         if (Date.now() >= startTime && Date.now() < that.model.endTime) {
           timeLeft = that.model.endTime - Date.now();
@@ -24,12 +23,12 @@ define(['backbone', 'handlebars', '../templates/game','./MapView'], function(Bac
           if (secLeft < 10) {
             secLeft = '0'+secLeft;
           }
-          $('.timer').html('<p>'+minLeft+':'+secLeft+'</p>');
+          $('.timer').html(minLeft+':'+secLeft);
         } else if (Date.now() < startTime) {
           secToStart = Math.floor((startTime - Date.now()) / 1000);
-          $('.timer').html('<p>Game starting in '+secToStart+' seconds.</p>');
+          $('.timer').html('Game starting in '+secToStart+' seconds.');
         } else {
-          $('.timer').html('<p>0:00</p>');
+          $('.timer').html('0:00');
           clearInterval(gameTimer);
           that.model.endGame();
         }
@@ -44,7 +43,7 @@ define(['backbone', 'handlebars', '../templates/game','./MapView'], function(Bac
       var that = this;
       $('#container').append('<section class="scoreboard"></section>');
       $('#container').append('<section class="modalMask"></section>');
-      $('.scoreboard').append('<table><tr><th>Name</th><th>Score</th><th>Kills</th><th>Deaths</th><th>Attempted Tags</th><th>Tags/min</th></tr></table>');
+      $('.scoreboard').append('<table><tr><th>Name</th><th>Score</th><th>Kills</th><th>Deaths</th><th>Tag Attempts</th></tr></table>');
       _.each(data.players, function(player){
         $('.scoreboard tbody').append('<tr><td>' + player.name + '</td><td>' + player.score + '</td><td>' + player.kills + '</td><td>' + player.deaths + '</td><td>' + player.totalTags + '</td></tr>');
       });

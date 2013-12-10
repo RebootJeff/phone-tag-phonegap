@@ -3471,23 +3471,6 @@ input[type="search"]::-webkit-search-cancel-button {
   color: #454545;
 }
 
-@font-face {
-  font-family: "Source Sans";
-  src: url("font/SourceSansPro-Regular.otf");
-}
-
-@font-face {
-  font-family: "Source Sans";
-  src: url("font/SourceSansPro-Light.otf");
-  font-weight: 200;
-}
-
-@font-face {
-  font-family: "Source Sans";
-  src: url("font/SourceSansPro-Semibold.otf");
-  font-weight: 600;
-}
-
 body {
   margin: 0;
   padding: 0;

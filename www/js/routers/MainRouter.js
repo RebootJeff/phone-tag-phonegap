@@ -41,7 +41,7 @@ define(['backbone', '../views/GameView', '../models/game', '../views/HomeView', 
         setTimeout(function(){
           that.slidePageFrom($('#loadingView'), $('#game'), 'left');
           $('.tag').removeClass('hidden');
-        }, 2000);
+        }, 10000);
       }
     },
 

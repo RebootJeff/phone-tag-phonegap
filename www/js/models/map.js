@@ -1,5 +1,5 @@
 define(['backbone'], function(Backbone){
-  var map = Backbone.Model.extend({
+  var Map = Backbone.Model.extend({
 
     initialize: function(options){
       google.maps.visualRefresh = true;
@@ -222,16 +222,18 @@ define(['backbone'], function(Backbone){
         // Update location if there is a lat and lng sent
         if(marker.id !== this.get('currentPlayer').get('name') && location.lat && location.lng){
           marker.setPosition(new google.maps.LatLng(location.lat, location.lng));
-          this.setDistanceFromUser(marker);
-          // console.log('distance from current player is: ', marker.distanceFromCurrentPlayer);
         }
       }
     },
 
-    setDistanceFromUser: function(marker){
-      if(this.currentPlayerMarker){
-        marker.distanceFromCurrentPlayer = google.maps.geometry.spherical.computeDistanceBetween(this.currentPlayerMarker.position, marker.position);
-      }
+    // setDistanceFromUser: function(marker){
+    //   if(this.currentPlayerMarker){
+    //     marker.distanceFromCurrentPlayer = google.maps.geometry.spherical.computeDistanceBetween(this.currentPlayerMarker.position, marker.position);
+    //   }
+    // },
+
+    checkDistance: function(marker1, marker2, range){
+      return google.maps.geometry.spherical.computeDistanceBetween(marker1.position, marker2.position) < range;
     },
 
     removeMarker: function(data){
@@ -306,11 +308,9 @@ define(['backbone'], function(Backbone){
       var player = this.get('currentPlayer');
 
       for (var powerUpID in this.powerUpMarkers) {
-
         marker = this.powerUpMarkers[powerUpID];
-        this.setDistanceFromUser(marker);
 
-        if( marker && marker.distanceFromCurrentPlayer <= marker.radius ){
+        if(this.checkDistance(marker, this.currentPlayerMarker, marker.radius)){
           var data = {
             playerName: player.get('name'),
             gameID: player.get('gameID'),
@@ -318,7 +318,7 @@ define(['backbone'], function(Backbone){
             powerUpID: marker.id
           };
           if (marker.title === 'respawn') {
-            this.setPlayerAlive(data.playerName);
+            this.removePowerUpFromMap(data);
             this.get('socket').emit('playerRespawn', data);
           } else {
             this.get('socket').emit('addItemToPlayer', data);
@@ -363,19 +363,20 @@ define(['backbone'], function(Backbone){
         // Set new position for Pacman
         newPosition = new google.maps.LatLng(that.pacmanMarker.position.ob, that.pacmanMarker.position.pb + movement[direction]);
         that.pacmanMarker.setPosition(newPosition);
-        distance = google.maps.geometry.spherical.computeDistanceBetween(that.pacmanMarker.position, that.currentPlayerMarker.position);
         // Determine if Pacman killed the current user
-        if(distance < 22 && currentPlayer.get('alive')){
-          var response = {};
-          response.playerName = currentPlayer.get('name');
-          response.gameID = currentPlayer.get('gameID');
-          that.get('socket').emit('setPlayerDead', response);
-          currentPlayer.set('alive', false);
-          // Respawn for the current player after 10 seconds
-          // setTimeout(function(){
-          //   that.get('socket').emit('setPlayerAlive', response);
-          //   currentPlayer.set('alive', true);
-          // }, 10000);
+        if(currentPlayer.get('alive') &&
+          !currentPlayer.get('invincible') &&
+          that.checkDistance(that.pacmanMarker, that.currentPlayerMarker, 22)){
+            var response = {};
+            response.playerName = currentPlayer.get('name');
+            response.gameID = currentPlayer.get('gameID');
+            that.get('socket').emit('setPlayerDead', response);
+            currentPlayer.set('alive', false);
+            // Respawn for the current player after 10 seconds
+            // setTimeout(function(){
+            //   that.get('socket').emit('setPlayerAlive', response);
+            //   currentPlayer.set('alive', true);
+            // }, 10000);
         }
 
       }, 50);
@@ -421,22 +422,24 @@ define(['backbone'], function(Backbone){
 
     checkPlayersToTag: function(){
       var tagged = [],
+          currentPlayer = this.get('currentPlayer'),
           marker,
           player,
           response;
 
       // Loop through all players to see if they are tagable
       for(var playerName in this.playerMarkers){
-        marker = this.playerMarkers[playerName];
-        if(marker.distanceFromCurrentPlayer < 10 && marker.id !== this.get('currentPlayer').get('name')){
-          player = {playerName: marker.id, gameID: this.get('currentPlayer').get('gameID')};
-          tagged.push(player);
+        playerMarker = this.playerMarkers[playerName];
+        if(playerName !== currentPlayer.get('name') &&
+          this.checkDistance(playerMarker, this.currentPlayerMarker, 10)){
+            player = {playerName: playerName, gameID: currentPlayer.get('gameID')};
+            tagged.push(player);
         }
       }
       response = {
         taggedPlayers: tagged,
-        taggerName: this.get('currentPlayer').get('name'),
-        gameID: this.get('currentPlayer').get('gameID')
+        taggerName: currentPlayer.get('name'),
+        gameID: currentPlayer.get('gameID')
       };
       this.get('socket').emit('tagPlayers', response);
     },
@@ -451,7 +454,7 @@ define(['backbone'], function(Backbone){
       if(name && name !== this.get('currentPlayer').get('name')){
         marker = this.playerMarkers[name];
         center = marker.position;
-        strokeColor = '#3777D8';
+        strokeColor = '#880000';
       }
 
       var circleOptions = {
@@ -476,11 +479,13 @@ define(['backbone'], function(Backbone){
     },
 
     tagCountdown: function(){
-      $('button.tag').prop('disabled',true);
+      $('button.tag').prop('disabled', true);
       setTimeout(function(){
         clearInterval(timer);
         $('button.tag').html('TAG');
-        $('button.tag').prop('disabled',false);
+        if(this.get('currentPlayer').get('alive')){
+          $('button.tag').prop('disabled', false);
+        }
       }, 10000);
       var count = 10;
       var timer = setInterval(function(){
@@ -491,6 +496,7 @@ define(['backbone'], function(Backbone){
 
     setPlayerDead: function(name){
       if(name === this.get('currentPlayer').get('name')){
+        $('button.tag').prop('disabled', true);
         this.get('currentPlayer').set('alive', false);
         // this.tagCountdown();
       }
@@ -499,7 +505,7 @@ define(['backbone'], function(Backbone){
 
     setPlayerAlive: function(name){
       if(name === this.get('currentPlayer').get('name')){
-        this.get('currentPlayer').set('alive', true);
+        $('button.tag').prop('disabled', false);
         this.currentPlayerMarker.setIcon(this.playerIcon);
       } else {
         this.playerMarkers[name].setIcon(this.enemyIcon);
@@ -539,5 +545,5 @@ define(['backbone'], function(Backbone){
       this.map.setCenter(this.currentPlayerMarker.position);
     }
   });
-  return map;
+  return Map;
 });

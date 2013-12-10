@@ -12,20 +12,51 @@ $color_deep_red = #C9001B
 $color_placeholder_text = #666
 
 // --------------------------------------------
+// font setup
+
+@font-face {
+  font-family: "Geared Slab";
+  src: url("font/GearedSlab.ttf");
+}
+
+@font-face {
+  font-family: "Geared Slab";
+  src: url("font/GearedSlab-Light.ttf");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Geared Slab";
+  src: url("font/GearedSlab-Bold.ttf");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Geared Slab";
+  src: url("font/GearedSlab-Extrabold.ttf");
+  font-weight: 800;
+}
+
+// --------------------------------------------
 // universal styles
 
 body
   margin: 0
   padding: 0
-  // font-family: 'Sans Serif'
-  font-size: 20px
-  background-color: black
+  font-family: 'Geared Slab'
+  font-size: 24px
   color: white
   position: absolute
   top: 0
   left: 0
   bottom: 0
   right: 0
+  background: black
+
+h1
+  font-weight: 800
+  margin-top: 0.7em
+  margin-bottom: 0.7em
 
 input[type='text']
   width: 80%
@@ -127,6 +158,16 @@ transition-duration(n)
   font-size: 1.5em
 
 // --------------------------------------------
+// loading screen
+
+.loading-text
+  margin: 0.5em
+  font-size: 1.2em
+
+.instructions li
+  text-align: left
+
+// --------------------------------------------
 // map
 .gm-style-cc, .gmnoprint
   display none
@@ -137,6 +178,9 @@ transition-duration(n)
   width: 100%
   font-size: 1.5em
   color: black
+  ul
+    padding: 0
+    list-style: none
 
 .menu
   height: 100%
@@ -144,7 +188,7 @@ transition-duration(n)
   position: absolute
   left: 0
   z-index: 11
-  background-color: rgba(0, 0, 0, 0.5)
+  background-color: rgba(0, 0, 0, 0.7)
   transition-property: all
   transition-duration(0.1s)
   p
@@ -167,10 +211,13 @@ transition-duration(n)
 .center-map
   background-image: url('../img/menu/map-center.png')
 
+.power-up
+  margin: 0.25em auto
+
 .power-up.invisible
-    background-image: url('../img/menu/power-up-invisibility.png')
+  background-image: url('../img/menu/power-up-invisibility.png')
 .power-up.invincible
-    background-image: url('../img/menu/power-up-invincibility.png')
+  background-image: url('../img/menu/power-up-invincibility.png')
 
 .toggle-menu
   position: absolute
@@ -191,8 +238,8 @@ transition-duration(n)
   height: 20%
 
 .tag
-  bottom: 2%
-  width: 30%
+  bottom: 12%
+  width: 40%
   background-color: $color_dark_teal
   color: white
 
@@ -201,7 +248,7 @@ transition-duration(n)
 
 .scoreboard
   opacity: 0.6
-  background-color: #008605
+  background-color: $color_dark_teal
   position: fixed
   top: 10%
   left: 10%
@@ -210,6 +257,18 @@ transition-duration(n)
   width: 80%
   height: 80%
   z-index: 11
+  overflow: auto
+  table
+    border-collapse: collapse
+    tr
+      border-bottom: 1px solid white
+    tr:last-child
+      border-bottom: none
+    td, th
+      border-left: 1px solid white
+      padding: 0.5em
+    td:first-child, th:first-child
+      border-left: none
 
 .modalMask
   opacity: 0.9
