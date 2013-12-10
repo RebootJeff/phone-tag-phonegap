@@ -515,12 +515,13 @@ define(['backbone'], function(Backbone){
     markerRadarDisplay: function(marker){
       if(marker.id !== this.get('currentPlayer').get('name')){
         if(marker.timer){clearInterval(marker.timer);}
-        timeShown = calcDistance(marker, this.currentPlayerMarker) / 150 * 5000;
+        timeShown = this.calcDistance(marker, this.currentPlayerMarker) / 150 * 5000;
         if(timeShown < 800){
           timeShown = 800;
         }else if(timeShown >= 5000){
           timeShown = 5000;
         }
+        console.log('timeshown:',timeShown);
         var that = this;
         marker.setVisible(true);
 
