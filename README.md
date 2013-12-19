@@ -39,18 +39,18 @@ WIP: Installation for Android will be made easy when the Phone Tag dev team gets
 1. Get friends. Gather them. Hug them.
 2. Make sure your phones' GPS is enabled and well-hydrated.
 3. Open Phone Tag on your phones.
-4. Enter your screen names. If your screen names aren't unique, Phone Tag will implode in disgust.
-5. Tap the `Join` button.
+4. Enter your screen names (seen [here](http://i.imgur.com/kysFvzp.png)). If your screen names aren't unique, Phone Tag will implode in disgust.
+5. Tap the `Join` button (seen [here](http://i.imgur.com/J5Kcsai.png)).
 6. Wait for players to join.
 7. Game will automatically start when minimum number of players is reached.
-
-(WIP: insert Screenshots for README)
 
 ## Gameplay
 
 The objective of the game is to tag players while avoiding getting tagged. Games last 10 minutes. There are no teams. Plot twist: those friends I told you to get in step 1 are actually your enemies. The map helps you find your enemies. The power-ups help you in various ways. Your ability to run is crucial, but your knowledge of the real-life play environment could come in handy. Please do not chase/lure players into busy streets. That's frowned upon with much curvature.
 
 **_Note:_ Gameplay mechanics are constantly being tweaked. Most features, rules, values, and morals are subject to change. "Pecans rule!" is the only constant truth in life.**
+
+![loading instructions](http://i.imgur.com/bGDGE81.png)
 
 ### Tagging
 
@@ -59,7 +59,7 @@ The objective of the game is to tag players while avoiding getting tagged. Games
 - **Broadcast:** Much like how gunfire notifies nearby ears that a gun has been fired, any time someone hits the tag button, other players may notice because the map will show it. When pondering the reasons to hit your own tag button, consider that you will be revealing your location on the map.
 - **Death:** If you are tagged by someone, you will be "dead" for 10 seconds. During this time, you can't tag other players nor pick up power-ups. Sucks to be you. Perhaps now is a good time to run to a new location (towards a power-up, towards an enemy) in hopes of reaching your destination after 10 seconds. After your 10-second death, you will be able to resume playing normally. Life is so good.
 
-(WIP: insert Screenshots for README)
+![tagging](http://i.imgur.com/49Nex3H.png)
 
 ### The Map
 
@@ -71,26 +71,28 @@ You thought your dog was awesome, but the map will be your best friend while pla
 - Power-ups are shown (not flashed) on the map.
 - When someone hits their tag button, they reveal their position on the map. If you spot a circle on the map that grows rapidly before vanishing, you just spotted the location of someone who is now in cooldown.
 
-(WIP: insert Screenshots for README)
+![map](http://i.imgur.com/Oz7lfN3.png)
 
 ### Power-Ups
 
 Phone Tag is generous and it loves you. Phone Tag demonstrates its affection for you by randomly placing power-ups on the map. If you run to the power-up, you add it to your `Inventory`. You can carry up to 3 power-ups in your inventory. Tap a power-up in your inventory to activate it (if it must be triggered manually).
 
 - **Invisibility:** Hide yourself from everyone else's maps.
+  - Icon: Light rays
   - Triggered: manually
   - Duration: 20 seconds
 - **Invincibility:** If no one can tag you, then no one can stop you. Invincibility also makes you immune to environmental threats. Don't let it get to your head. You're still just a human. Although, humans are pretty cool.
+  - Icon: Star
   - Triggered: manually
   - Duration: 20 seconds
 
-(WIP: insert Screenshots for README)
+![inventory](http://i.imgur.com/bc6DC1y.png)
 
 ### Environmental Threats
 
 Phone Tag is spiteful and it hates you. Phone Tag will randomly activate monsters, bombs, storms, etc. to harm all players that don't run away quickly enough.
 
-- Pac-Man: WIP. Be afraid. Be very afraid.
+- Pac-Man: Be afraid. Be very afraid.
 
 (WIP: insert Screenshots for README)
 
