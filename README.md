@@ -138,12 +138,12 @@ There are 2 repos. There is the [phone-tag](https://github.com/RebootJeff/phone-
 ### Tech Stack
 
 - **Backbone**: client-side framework
-- **jQuery**: DOM manipulator
+- **Lodash**: utility library (Underscore alternative)
+- **Zepto.js**: DOM manipulator (jQuery alternative)
 - **Hammer.js**: touchscreen event library
-- **Lodash**: utility library
 - **RequireJS**: code/dependency manager
 - **Node.js**: server-side app platform
-  - **Express**: server-side framework
+- **Express**: server-side framework
 - **Socket.io**: real-time, event-driven, client-server comms
 - **Stylus**: CSS pre-processor
 - **Topcoat**: CSS framework
